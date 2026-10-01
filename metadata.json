@@ -1,0 +1,6 @@
+{
+  "name": "AnimeHub",
+  "description": "A modern, responsive anime and video streaming platform designed for personal and family streaming.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
