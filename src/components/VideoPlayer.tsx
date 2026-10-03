@@ -527,6 +527,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       <video
         ref={videoRef}
         src={resolvedUrl}
+        poster={currentEpisode.thumbnail || anime.bannerImage}
         preload="metadata"
         playsInline
         onLoadedMetadata={handleLoadedMetadata}
