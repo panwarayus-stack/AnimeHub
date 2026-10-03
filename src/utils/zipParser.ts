@@ -207,7 +207,7 @@ export async function inspectZipFile(
 
 /**
  * Converts parsed release & episode list into an AnimeHub Anime object:
- * Generates both R2 folder URL pattern (/anime/name/season/ep.mp4)
+ * Generates direct directory URL pattern (/anime/name/season/ep.mp4)
  * and can optionally store in-memory blob URLs for instant playback.
  */
 export function createAnimeFromRelease(
@@ -229,9 +229,9 @@ export function createAnimeFromRelease(
 
   const animeEpisodes: Episode[] = episodes.map(ep => {
     const padEp = String(ep.episodeNumber).padStart(2, '0');
-    // R2 target directory convention requested:
+    // Target directory convention requested:
     // /anime/{name1}/season{N}/episode{M}.mp4
-    const r2Path = `/anime/${slug}/season${releaseInfo.seasonNumber}/episode-${padEp}.${ep.extension || 'mp4'}`;
+    const mediaPath = `/anime/${slug}/season${releaseInfo.seasonNumber}/episode-${padEp}.${ep.extension || 'mp4'}`;
     const directBlobUrl = blobUrls && blobUrls[ep.episodeNumber];
 
     return {
@@ -242,7 +242,7 @@ export function createAnimeFromRelease(
       duration: 1440, // 24 minutes standard estimate
       durationFormatted: '24m',
       thumbnail: bannerPosterUrl || '',
-      videoUrl: directBlobUrl || r2Path,
+      videoUrl: directBlobUrl || mediaPath,
       subtitles: [
         {
           id: `sub-en-${ep.episodeNumber}`,
@@ -277,7 +277,7 @@ export function createAnimeFromRelease(
     season: `Season ${releaseInfo.seasonNumber}`,
     rating: 'PG-13',
     score: 9.0,
-    studio: releaseInfo.provider || 'Self-Hosted R2',
+    studio: releaseInfo.provider || 'Native Storage',
     audioInfo: releaseInfo.audioInfo,
     subtitleInfo: releaseInfo.subtitleInfo,
     totalEpisodes: episodes.length,

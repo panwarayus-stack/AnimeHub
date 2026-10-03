@@ -23,7 +23,6 @@ interface HomePageProps {
   getResumeEpisodeNumber: (animeId: string) => number;
   onNavigateToGenre: (genre: string) => void;
   onNavigateToBrowse: () => void;
-  onOpenZipModal?: () => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
@@ -36,8 +35,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   getProgress,
   getResumeEpisodeNumber,
   onNavigateToGenre,
-  onNavigateToBrowse,
-  onOpenZipModal
+  onNavigateToBrowse
 }) => {
   const featured = getFeaturedAnime();
   const trending = getTrendingAnime();
@@ -59,40 +57,6 @@ export const HomePage: React.FC<HomePageProps> = ({
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        {/* Quick Zip & Folder Sorter Banner */}
-        {onOpenZipModal && (
-          <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-rose-950/40 via-slate-900/80 to-slate-900/40 border border-rose-900/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-start gap-3.5">
-              <div className="p-2.5 rounded-xl bg-rose-600/20 text-rose-400 shrink-0">
-                <FolderArchive className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="text-sm sm:text-base font-bold text-white">
-                  Add Your Own Zip or Folder of Episodes
-                </h3>
-                <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                  Automatic sorter parses release formats like{' '}
-                  <code className="text-rose-300 font-mono text-[11px]">
-                    [Provider] Solo Leveling S02 1080p Multi Audio ESub.zip
-                  </code>{' '}
-                  and maps episodes directly to your{' '}
-                  <code className="text-slate-300 font-mono text-[11px]">
-                    /anime/name/season/
-                  </code>{' '}
-                  folder.
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={onOpenZipModal}
-              className="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-md shadow-rose-600/20 shrink-0 cursor-pointer"
-            >
-              <span>Auto-Sort Episodes</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        )}
-
         {/* Continue Watching (Active User Progress) */}
         <ContinueWatchingRow
           items={continueWatchingItems}

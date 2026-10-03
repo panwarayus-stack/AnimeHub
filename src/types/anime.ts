@@ -2,7 +2,8 @@ export interface SubtitleTrack {
   id: string;
   label: string;
   language: string;
-  url: string;
+  url?: string; // compatibility with existing code
+  src?: string; // compatibility with user specs
   default?: boolean;
 }
 
@@ -23,6 +24,7 @@ export interface Episode {
   durationFormatted: string; // e.g. "24m"
   thumbnail: string;
   videoUrl: string; // relative path (e.g. "/series/ep1.mp4") or full URL
+  videoPath?: string; // direct path inside Hugging Face repository
   subtitles?: SubtitleTrack[];
   audioTracks?: AudioTrack[];
 }

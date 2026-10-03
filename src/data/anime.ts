@@ -1,370 +1,364 @@
 import { Anime } from '../types/anime';
 import { createSampleSubtitleDataUrl } from '../services/video';
 
-// Local generated cinematic assets
-import cyberpunkBanner from '../assets/images/hero_cyberpunk_anime_1790840916276.jpg';
-import fantasyBanner from '../assets/images/fantasy_sword_anime_1790840930951.jpg';
-import mechaBanner from '../assets/images/mecha_scifi_anime_1790840942914.jpg';
-import sliceOfLifeBanner from '../assets/images/slice_of_life_anime_1790840955534.jpg';
+// Real high-definition official anime visual assets from secure CDNs
+const soloLevelingBanner = 'https://sololeveling-anime.net/assets/img/top/visual3.jpg';
+const soloLevelingBannerS2 = 'https://images.squarespace-cdn.com/content/v1/5fe4ca91702f3542289658ec/ec543ba6-e630-4e00-bf64-16a75908b981/Solo+Leveling+Season+2+Arise+from+the+Shadow+Key+Visual.jpg';
+const soloLevelingPoster = 'https://media.kitsu.io/anime/poster_images/17150/large.jpg';
 
-export const ANIME_CATALOG: Anime[] = [
+const jjkBanner = 'https://jujutsukaisen.jp/news/images/20231031_01_01.jpg';
+const jjkPoster = 'https://media.kitsu.io/anime/poster_images/16084/large.jpg';
+
+const demonSlayerBanner = 'https://media.kitsu.io/anime/cover_images/16624/large.jpg';
+const demonSlayerPoster = 'https://media.kitsu.io/anime/poster_images/16624/large.jpg';
+
+const aotBanner = 'https://media.kitsu.io/anime/cover_images/15865/large.jpg';
+const aotPoster = 'https://media.kitsu.io/anime/poster_images/15865/large.jpg';
+
+const frierenBanner = 'https://media.kitsu.io/anime/cover_images/17585/large.jpg';
+const frierenPoster = 'https://media.kitsu.io/anime/poster_images/17585/large.jpg';
+
+export const INITIAL_ANIME_CATALOG: Anime[] = [
   {
-    id: 'cyber-genesis-tokyo-2088',
-    slug: 'cyber-genesis-tokyo-2088',
-    title: 'Cyber Genesis: Tokyo 2088',
-    japaneseTitle: '電脳創世記 東京2088',
-    synopsis: 'In a rain-drenched Neo-Tokyo fractured between augmented megacorporations and rogue net-runners, an elite cyber-detective uncovers an encrypted neural network containing memories that should not exist. When high-tech syndicates mobilize to wipe her consciousness, she must align with underground hackers to ignite the spark of cybernetic rebellion.',
-    bannerImage: cyberpunkBanner,
-    posterImage: cyberpunkBanner,
-    genres: ['Cyberpunk', 'Sci-Fi', 'Action', 'Thriller'],
-    status: 'Ongoing',
-    releaseYear: 2025,
-    season: 'Winter 2025',
-    rating: 'TV-MA',
-    score: 9.2,
-    studio: 'Trigger Dynamics',
-    audioInfo: 'Dual Audio (Japanese, English Dub)',
-    subtitleInfo: 'English (Full), Spanish, French, German',
-    totalEpisodes: 12,
-    featured: true,
-    trending: true,
-    recentlyAdded: true,
-    episodes: [
-      {
-        id: 'cg-ep-01',
-        number: 1,
-        title: 'Awakening in the Rain',
-        synopsis: 'Detective Ren wakes in an abandoned server farm in Sector 7 with corrupted memory registers and a bounty on her head.',
-        duration: 1440,
-        durationFormatted: '24m',
-        thumbnail: cyberpunkBanner,
-        videoUrl: '/anime/cyber-genesis/ep-01.mp4',
-        subtitles: [
-          { id: 'sub-en-1', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Cyber Genesis - Ep 1'), default: true },
-          { id: 'sub-es-1', label: 'Spanish', language: 'es', url: createSampleSubtitleDataUrl('Spanish', 'Cyber Genesis - Ep 1') },
-          { id: 'sub-jp-1', label: 'Japanese Romaji', language: 'ja', url: createSampleSubtitleDataUrl('Japanese Romaji', 'Cyber Genesis - Ep 1') }
-        ],
-        audioTracks: [
-          { id: 'aud-jp-1', label: 'Japanese (Original)', language: 'ja', url: '', default: true },
-          { id: 'aud-en-1', label: 'English Dub', language: 'en', url: '' }
-        ]
-      },
-      {
-        id: 'cg-ep-02',
-        number: 2,
-        title: 'Neon Ghosts',
-        synopsis: 'A clandestine meeting in the neon alleyways of Akihabara reveals the true origins of Project Genesis.',
-        duration: 1380,
-        durationFormatted: '23m',
-        thumbnail: cyberpunkBanner,
-        videoUrl: '/anime/cyber-genesis/ep-02.mp4',
-        subtitles: [
-          { id: 'sub-en-2', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Cyber Genesis - Ep 2'), default: true },
-          { id: 'sub-es-2', label: 'Spanish', language: 'es', url: createSampleSubtitleDataUrl('Spanish', 'Cyber Genesis - Ep 2') }
-        ],
-        audioTracks: [
-          { id: 'aud-jp-2', label: 'Japanese (Original)', language: 'ja', url: '', default: true },
-          { id: 'aud-en-2', label: 'English Dub', language: 'en', url: '' }
-        ]
-      },
-      {
-        id: 'cg-ep-03',
-        number: 3,
-        title: 'The Firewall Breach',
-        synopsis: 'Corporate drones corner Ren inside the orbital transit tube as the syndicate AI initiates a total sector lockdown.',
-        duration: 1500,
-        durationFormatted: '25m',
-        thumbnail: cyberpunkBanner,
-        videoUrl: '/anime/cyber-genesis/ep-03.mp4',
-        subtitles: [
-          { id: 'sub-en-3', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Cyber Genesis - Ep 3'), default: true }
-        ]
-      },
-      {
-        id: 'cg-ep-04',
-        number: 4,
-        title: 'Signal in the Void',
-        synopsis: 'Ren and her rogue crew decipher the final coordinates broadcast by the lost satellite array.',
-        duration: 1420,
-        durationFormatted: '24m',
-        thumbnail: cyberpunkBanner,
-        videoUrl: '/anime/cyber-genesis/ep-04.mp4',
-        subtitles: [
-          { id: 'sub-en-4', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Cyber Genesis - Ep 4'), default: true }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'moonlit-blade-chronicles',
-    slug: 'moonlit-blade-chronicles',
-    title: 'Moonlit Blade: Chronicles of the Twin Moons',
-    japaneseTitle: '双月の刃',
-    synopsis: 'Centuries after the celestial fracturing that created two moons in the sky, wandering swordsman Jin guards an ancient runic blade capable of cleaving void-beasts. Drawn to the misty Whispering Forest, he encounters a deposed princess who carries the lost crest of the Lunar Empire.',
-    bannerImage: fantasyBanner,
-    posterImage: fantasyBanner,
+    id: 'solo-leveling-s01',
+    slug: 'solo-leveling-season-1',
+    title: 'Solo Leveling (Season 1)',
+    japaneseTitle: '俺だけレベルアップな件 (나 혼자만 레벨업)',
+    synopsis: 'Known as the "Weakest Hunter of All Mankind", E-rank hunter Sung Jinwoo is brutally slaughtered along with his raid party in a double dungeon. Miraculously surviving, he awakens to a mysterious game-like "System" quest window only visible to him, granting him the unique ability to level up, acquire skills, and ascend beyond mortal limitations.',
+    bannerImage: soloLevelingBanner,
+    posterImage: soloLevelingPoster,
     genres: ['Action', 'Fantasy', 'Adventure', 'Supernatural'],
     status: 'Completed',
     releaseYear: 2024,
-    season: 'Autumn 2024',
-    rating: 'PG-13',
-    score: 8.9,
-    studio: 'Ufotable Arts',
-    audioInfo: 'Dual Audio (Japanese, English Dub)',
-    subtitleInfo: 'English, French, Portuguese',
-    totalEpisodes: 24,
-    featured: true,
-    trending: true,
-    recentlyAdded: false,
-    episodes: [
-      {
-        id: 'mb-ep-01',
-        number: 1,
-        title: 'The Solitary Ronin',
-        synopsis: 'Jin enters the Whispering Forest under the silver glow of the twin moons, where crystalline spirits whisper of imminent peril.',
-        duration: 1410,
-        durationFormatted: '24m',
-        thumbnail: fantasyBanner,
-        videoUrl: '/anime/moonlit-blade/ep-01.mp4',
-        subtitles: [
-          { id: 'mb-sub-1', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Moonlit Blade - Ep 1'), default: true }
-        ]
-      },
-      {
-        id: 'mb-ep-02',
-        number: 2,
-        title: 'Blade of the Ancestors',
-        synopsis: 'A raid by the Crimson Fang clan forces Jin to draw the runic blade, revealing its luminous power.',
-        duration: 1390,
-        durationFormatted: '23m',
-        thumbnail: fantasyBanner,
-        videoUrl: '/anime/moonlit-blade/ep-02.mp4',
-        subtitles: [
-          { id: 'mb-sub-2', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Moonlit Blade - Ep 2'), default: true }
-        ]
-      },
-      {
-        id: 'mb-ep-03',
-        number: 3,
-        title: 'The Eclipse Covenant',
-        synopsis: 'The twin moons align, granting demonic warlords the power to walk upon mortal realm soil.',
-        duration: 1450,
-        durationFormatted: '24m',
-        thumbnail: fantasyBanner,
-        videoUrl: '/anime/moonlit-blade/ep-03.mp4',
-        subtitles: [
-          { id: 'mb-sub-3', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Moonlit Blade - Ep 3'), default: true }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'orbital-vanguard-stellar-horizon',
-    slug: 'orbital-vanguard-stellar-horizon',
-    title: 'Orbital Vanguard: Stellar Horizon',
-    japaneseTitle: '軌道前衛 ステラ・ホライゾン',
-    synopsis: 'Stationed on the defensive ring of Jupiter, Captain Keith leads Squadron Aegis, piloting massive celestial mecha engineered to repel an enigmatic non-carbon threat known as the Silicoids. As humanity prepares for planetary evacuation, Keith discovers the aliens are attempting communication, not conquest.',
-    bannerImage: mechaBanner,
-    posterImage: mechaBanner,
-    genres: ['Mecha', 'Sci-Fi', 'Military', 'Space'],
-    status: 'Ongoing',
-    releaseYear: 2025,
-    season: 'Spring 2025',
-    rating: 'PG-13',
-    score: 8.7,
-    studio: 'Sunrise Orbital',
-    audioInfo: 'Japanese with English Subtitles',
-    subtitleInfo: 'English, Italian, German, Japanese',
-    totalEpisodes: 13,
-    featured: true,
-    trending: false,
-    recentlyAdded: true,
-    episodes: [
-      {
-        id: 'ov-ep-01',
-        number: 1,
-        title: 'Scramble at Jovian Gate',
-        synopsis: 'A sudden gravitational anomaly near Ganymede triggers an emergency launch of Vanguard Unit 01.',
-        duration: 1470,
-        durationFormatted: '25m',
-        thumbnail: mechaBanner,
-        videoUrl: '/anime/orbital-vanguard/ep-01.mp4',
-        subtitles: [
-          { id: 'ov-sub-1', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Orbital Vanguard - Ep 1'), default: true }
-        ]
-      },
-      {
-        id: 'ov-ep-02',
-        number: 2,
-        title: 'Resonance Frequency',
-        synopsis: 'During close-range dogfight combat, Keith catches an auditory sequence transmitted straight into his neural link.',
-        duration: 1420,
-        durationFormatted: '24m',
-        thumbnail: mechaBanner,
-        videoUrl: '/anime/orbital-vanguard/ep-02.mp4',
-        subtitles: [
-          { id: 'ov-sub-2', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Orbital Vanguard - Ep 2'), default: true }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'tides-of-kamakura',
-    slug: 'tides-of-kamakura',
-    title: 'Tides of Kamakura',
-    japaneseTitle: '鎌倉の潮騒',
-    synopsis: 'A heartfelt, nostalgic story set along the sunlit Enoshima coast. Aspiring acoustic composer Haruto returns to his grandmother’s coastal seaside cafe after feeling burnt out in Tokyo. There, he reconnects with Aoi, a quiet watercolor artist restoring century-old stained glass at the local maritime chapel.',
-    bannerImage: sliceOfLifeBanner,
-    posterImage: sliceOfLifeBanner,
-    genres: ['Slice of Life', 'Romance', 'Drama'],
-    status: 'Completed',
-    releaseYear: 2024,
-    season: 'Summer 2024',
-    rating: 'G',
-    score: 9.0,
-    studio: 'Kyoto Animation Studio',
-    audioInfo: 'Dual Audio (Japanese, English Dub)',
-    subtitleInfo: 'English, Spanish, Traditional Chinese',
+    season: 'Season 1',
+    rating: 'TV-MA',
+    score: 9.4,
+    studio: 'A-1 Pictures',
+    audioInfo: 'Multi Audio (Japanese Original, English Dub, Hindi)',
+    subtitleInfo: 'English (ESub), Spanish, French, German',
     totalEpisodes: 12,
-    featured: false,
+    featured: true,
     trending: true,
     recentlyAdded: true,
-    episodes: [
-      {
-        id: 'tk-ep-01',
-        number: 1,
-        title: 'Summer Seaside Breeze',
-        synopsis: 'The rhythmic sound of the Enoden train and the salty breeze welcome Haruto back to the quiet coast.',
-        duration: 1350,
-        durationFormatted: '23m',
-        thumbnail: sliceOfLifeBanner,
-        videoUrl: '/anime/tides-of-kamakura/ep-01.mp4',
-        subtitles: [
-          { id: 'tk-sub-1', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Tides of Kamakura - Ep 1'), default: true }
-        ]
-      },
-      {
-        id: 'tk-ep-02',
-        number: 2,
-        title: 'Stained Glass and Sea Salt',
-        synopsis: 'Haruto visits the coastal chapel and hears an unexpected melody played upon an upright harmonium.',
-        duration: 1380,
-        durationFormatted: '23m',
-        thumbnail: sliceOfLifeBanner,
-        videoUrl: '/anime/tides-of-kamakura/ep-02.mp4',
-        subtitles: [
-          { id: 'tk-sub-2', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Tides of Kamakura - Ep 2'), default: true }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'shadow-sovereign-veil',
-    slug: 'shadow-sovereign-veil',
-    title: 'Shadow Sovereign: Veil of Oblivion',
-    japaneseTitle: '影の覇王',
-    synopsis: 'In a Gothic metropolis where noble families command shadow beasts, the exiled third heir discovers an ethereal artifact allowing him to merge with shadows unseen. He constructs a clandestine network to overturn the corrupt council from the darkness.',
-    bannerImage: fantasyBanner,
-    posterImage: fantasyBanner,
-    genres: ['Dark Fantasy', 'Action', 'Mystery', 'Supernatural'],
-    status: 'Ongoing',
-    releaseYear: 2025,
-    season: 'Winter 2025',
-    rating: 'TV-14',
-    score: 8.8,
-    studio: 'Mappa Works',
-    audioInfo: 'Dual Audio (Japanese, English Dub)',
-    subtitleInfo: 'English, Spanish, Italian',
-    totalEpisodes: 24,
-    featured: false,
-    trending: true,
-    recentlyAdded: false,
-    episodes: [
-      {
-        id: 'ss-ep-01',
-        number: 1,
-        title: 'Shadows Cast by High Towers',
-        synopsis: 'From the rainy rooftops of Belhaven, William watches the council execution that marks the start of his vendetta.',
+    episodes: Array.from({ length: 12 }, (_, i) => {
+      const num = i + 1;
+      const pad = String(num).padStart(2, '0');
+      const filename = `[Toonworld4all] Solo Leveling S01E${pad} 1080p HEVC 10bit WEB-DL Multi Audio ESub.mp4`;
+      const relativePath = `anime/Aura Leveling/Season-1/${filename}`;
+      return {
+        id: `sl-s1-ep${pad}`,
+        number: num,
+        title: `Episode ${num}`,
+        synopsis: `Sung Jinwoo fights to survive, level up and unlock the power of the Shadow Monarch in Season 1, Episode ${num}.`,
         duration: 1440,
         durationFormatted: '24m',
-        thumbnail: fantasyBanner,
-        videoUrl: '/anime/shadow-sovereign/ep-01.mp4',
+        thumbnail: soloLevelingBanner,
+        videoUrl: `/${relativePath}`,
+        videoPath: relativePath,
         subtitles: [
-          { id: 'ss-sub-1', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Shadow Sovereign - Ep 1'), default: true }
+          { 
+            id: `sub-sl1-${num}`, 
+            label: 'English (ESub)', 
+            language: 'en', 
+            url: createSampleSubtitleDataUrl('English', `Solo Leveling S1 - Ep ${num}`), 
+            src: createSampleSubtitleDataUrl('English', `Solo Leveling S1 - Ep ${num}`), 
+            default: true 
+          }
+        ],
+        audioTracks: [
+          { id: `aud-sl1-${num}`, label: 'Multi Audio (JP / EN / HI)', language: 'multi', url: '', default: true }
+        ]
+      };
+    })
+  },
+  {
+    id: 'solo-leveling-s02',
+    slug: 'solo-leveling-season-2',
+    title: 'Solo Leveling Season 2: Arise from the Shadow',
+    japaneseTitle: '俺だけレベルアップな件 (Season 2)',
+    synopsis: 'Now commanding an army of loyal shadow soldiers extracted from the souls of fallen enemies, Sung Jinwoo prepares for high-rank Red Gate incursions and the perilous Jeju Island raid.',
+    bannerImage: soloLevelingBannerS2,
+    posterImage: soloLevelingPoster,
+    genres: ['Action', 'Fantasy', 'Adventure', 'Supernatural'],
+    status: 'Ongoing',
+    releaseYear: 2025,
+    season: 'Season 2',
+    rating: 'TV-MA',
+    score: 9.5,
+    studio: 'A-1 Pictures',
+    audioInfo: 'Multi Audio (Japanese, English, Hindi)',
+    subtitleInfo: 'English (ESub), Spanish, French',
+    totalEpisodes: 12,
+    featured: true,
+    trending: true,
+    recentlyAdded: true,
+    episodes: Array.from({ length: 12 }, (_, i) => {
+      const num = i + 1;
+      const pad = String(num).padStart(2, '0');
+      const filename = `[Toonworld4all] Solo Leveling S02E${pad} 1080p x265 10bit WEB-DL Multi Audio ESub.mp4`;
+      const relativePath = `anime/Aura Leveling/Season-2/${filename}`;
+      return {
+        id: `sl-s2-ep${pad}`,
+        number: num,
+        title: `Episode ${num}`,
+        synopsis: `The hunter ascends further as Monarchs gather in Season 2, Episode ${num}.`,
+        duration: 1440,
+        durationFormatted: '24m',
+        thumbnail: soloLevelingBannerS2,
+        videoUrl: `/${relativePath}`,
+        videoPath: relativePath,
+        subtitles: [
+          { 
+            id: `sub-sl2-${num}`, 
+            label: 'English (ESub)', 
+            language: 'en', 
+            url: createSampleSubtitleDataUrl('English', `Solo Leveling S2 - Ep ${num}`), 
+            src: createSampleSubtitleDataUrl('English', `Solo Leveling S2 - Ep ${num}`), 
+            default: true 
+          }
+        ]
+      };
+    })
+  },
+  {
+    id: 'jujutsu-kaisen-s02',
+    slug: 'jujutsu-kaisen',
+    title: 'Jujutsu Kaisen: Shibuya Incident',
+    japaneseTitle: '呪術廻戦',
+    synopsis: 'On October 31st, 2019, a mysterious curtain descends over Shibuya Station during Halloween, trapping tens of thousands of civilians. Satoru Gojo enters the underground alone to confront Pseudo-Geto and the disaster curses.',
+    bannerImage: jjkBanner,
+    posterImage: jjkPoster,
+    genres: ['Action', 'Supernatural', 'Dark Fantasy', 'Mystery'],
+    status: 'Completed',
+    releaseYear: 2024,
+    season: 'Season 2',
+    rating: 'TV-MA',
+    score: 9.2,
+    studio: 'MAPPA',
+    audioInfo: 'Dual Audio (Japanese, English Dub)',
+    subtitleInfo: 'English (Full), Spanish, French',
+    totalEpisodes: 23,
+    featured: true,
+    trending: true,
+    recentlyAdded: false,
+    episodes: [
+      {
+        id: 'jjk-ep-01',
+        number: 1,
+        title: 'Hidden Inventory',
+        synopsis: 'In spring 2006, second-year Jujutsu High students Satoru Gojo and Suguru Geto receive a mission to protect the Star Plasma Vessel.',
+        duration: 1440,
+        durationFormatted: '24m',
+        thumbnail: jjkBanner,
+        videoUrl: '/anime/jujutsu-kaisen/season2/episode-01.mp4',
+        videoPath: 'anime/jujutsu-kaisen/season2/episode-01.mp4',
+        subtitles: [
+          { 
+            id: 'sub-jjk-1', 
+            label: 'English', 
+            language: 'en', 
+            url: createSampleSubtitleDataUrl('English', 'Jujutsu Kaisen - Ep 1'), 
+            src: createSampleSubtitleDataUrl('English', 'Jujutsu Kaisen - Ep 1'), 
+            default: true 
+          }
         ]
       }
     ]
   },
   {
-    id: 'chrono-paradox-divergent-lines',
-    slug: 'chrono-paradox-divergent-lines',
-    title: 'Chrono Paradox: Divergent Lines',
-    japaneseTitle: '時空のパラドックス',
-    synopsis: 'A university physics researcher constructs an experimental quantum scanner, only to receive a distress phone call from his own voice six hours in the future warning him that the prototype will cause the erasure of everyone on campus.',
-    bannerImage: cyberpunkBanner,
-    posterImage: cyberpunkBanner,
-    genres: ['Sci-Fi', 'Psychological', 'Mystery', 'Thriller'],
+    id: 'demon-slayer-entertainment-district',
+    slug: 'demon-slayer',
+    title: 'Demon Slayer: Entertainment District Arc',
+    japaneseTitle: '鬼滅の刃 遊郭編',
+    synopsis: 'Tanjiro, Zenitsu, and Inosuke accompany the Sound Hashira Tengen Uzui into the Yoshiwara entertainment district to investigate the disappearance of his kunoichi wives.',
+    bannerImage: demonSlayerBanner,
+    posterImage: demonSlayerPoster,
+    genres: ['Action', 'Fantasy', 'Historical', 'Supernatural'],
     status: 'Completed',
     releaseYear: 2024,
-    season: 'Spring 2024',
-    rating: 'PG-13',
-    score: 9.1,
-    studio: 'White Fox Prime',
-    audioInfo: 'Japanese with English Subtitles',
-    subtitleInfo: 'English, French, Japanese',
-    totalEpisodes: 24,
+    season: 'Season 3',
+    rating: 'TV-14',
+    score: 9.0,
+    studio: 'Ufotable',
+    audioInfo: 'Dual Audio (Japanese, English Dub)',
+    subtitleInfo: 'English, Spanish, German',
+    totalEpisodes: 11,
+    featured: true,
+    trending: true,
+    recentlyAdded: false,
+    episodes: [
+      {
+        id: 'ds-ep-01',
+        number: 1,
+        title: 'Sound Hashira Tengen Uzui',
+        synopsis: 'Tanjiro and his comrades return from the Mugen Train mission and volunteer to assist Sound Hashira Tengen Uzui on a perilous infiltration.',
+        duration: 2700,
+        durationFormatted: '45m',
+        thumbnail: demonSlayerBanner,
+        videoUrl: '/anime/demon-slayer/season3/episode-01.mp4',
+        videoPath: 'anime/demon-slayer/season3/episode-01.mp4',
+        subtitles: [
+          { 
+            id: 'sub-ds-1', 
+            label: 'English', 
+            language: 'en', 
+            url: createSampleSubtitleDataUrl('English', 'Demon Slayer - Ep 1'), 
+            src: createSampleSubtitleDataUrl('English', 'Demon Slayer - Ep 1'), 
+            default: true 
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'attack-on-titan-the-final-season',
+    slug: 'attack-on-titan',
+    title: 'Attack on Titan: The Final Season',
+    japaneseTitle: '進撃の巨人 The Final Season',
+    synopsis: 'Four years after the Scouts reached the sea, the true nature of the world beyond the walls is revealed. Eren Yeager launches an attack on Marley, setting into motion the Rumbling.',
+    bannerImage: aotBanner,
+    posterImage: aotPoster,
+    genres: ['Action', 'Drama', 'Military', 'Mystery'],
+    status: 'Completed',
+    releaseYear: 2023,
+    season: 'The Final Season',
+    rating: 'TV-MA',
+    score: 9.4,
+    studio: 'MAPPA / Wit Studio',
+    audioInfo: 'Dual Audio (Japanese, English Dub)',
+    subtitleInfo: 'English, Spanish, French, Italian',
+    totalEpisodes: 28,
     featured: false,
-    trending: false,
+    trending: true,
+    recentlyAdded: false,
+    episodes: [
+      {
+        id: 'aot-ep-01',
+        number: 1,
+        title: 'The Other Side of the Ocean',
+        synopsis: 'As Marley battles the Mid-East Allied Forces to end a four-year war, the military unleashes its Eldian titan warrior unit.',
+        duration: 1440,
+        durationFormatted: '24m',
+        thumbnail: aotBanner,
+        videoUrl: '/anime/attack-on-titan/season4/episode-01.mp4',
+        videoPath: 'anime/attack-on-titan/season4/episode-01.mp4',
+        subtitles: [
+          { 
+            id: 'sub-aot-1', 
+            label: 'English', 
+            language: 'en', 
+            url: createSampleSubtitleDataUrl('English', 'Attack on Titan - Ep 1'), 
+            src: createSampleSubtitleDataUrl('English', 'Attack on Titan - Ep 1'), 
+            default: true 
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'frieren-beyond-journeys-end',
+    slug: 'frieren',
+    title: "Frieren: Beyond Journey's End",
+    japaneseTitle: '葬送のフリーレン',
+    synopsis: 'After a 10-year quest, the elven mage Frieren and her heroic companions defeated the Demon King. Fifty years later, she watches her mortal comrade pass away from old age.',
+    bannerImage: frierenBanner,
+    posterImage: frierenPoster,
+    genres: ['Fantasy', 'Adventure', 'Slice of Life', 'Drama'],
+    status: 'Completed',
+    releaseYear: 2024,
+    season: 'Season 1',
+    rating: 'PG-13',
+    score: 9.3,
+    studio: 'Madhouse',
+    audioInfo: 'Dual Audio (Japanese, English Dub)',
+    subtitleInfo: 'English, Spanish, French',
+    totalEpisodes: 28,
+    featured: false,
+    trending: true,
     recentlyAdded: true,
     episodes: [
       {
-        id: 'cp-ep-01',
+        id: 'fr-ep-01',
         number: 1,
-        title: 'The Six-Hour Warning',
-        synopsis: 'The phone on the workbench rings with an impossible caller ID: his own mobile number.',
-        duration: 1410,
+        title: "The Journey's End",
+        synopsis: 'Frieren and the hero party celebrate the victory banquet in the royal capital, viewing the Era Meteor Shower that occurs once every half-century.',
+        duration: 1440,
         durationFormatted: '24m',
-        thumbnail: cyberpunkBanner,
-        videoUrl: '/anime/chrono-paradox/ep-01.mp4',
+        thumbnail: frierenBanner,
+        videoUrl: '/anime/frieren/season1/episode-01.mp4',
+        videoPath: 'anime/frieren/season1/episode-01.mp4',
         subtitles: [
-          { id: 'cp-sub-1', label: 'English', language: 'en', url: createSampleSubtitleDataUrl('English', 'Chrono Paradox - Ep 1'), default: true }
+          { 
+            id: 'sub-fr-1', 
+            label: 'English', 
+            language: 'en', 
+            url: createSampleSubtitleDataUrl('English', 'Frieren - Ep 1'), 
+            src: createSampleSubtitleDataUrl('English', 'Frieren - Ep 1'), 
+            default: true 
+          }
         ]
       }
     ]
   }
 ];
 
+export const ANIME_CATALOG = INITIAL_ANIME_CATALOG;
+
 export const ALL_GENRES = [
   'All',
   'Action',
-  'Sci-Fi',
-  'Cyberpunk',
   'Fantasy',
   'Adventure',
+  'Supernatural',
+  'Sci-Fi',
+  'Dark Fantasy',
   'Slice of Life',
-  'Romance',
-  'Mecha',
+  'Drama',
   'Mystery',
-  'Thriller',
-  'Supernatural'
+  'Military',
+  'Historical'
 ];
 
+const STORAGE_KEY_CUSTOM_CATALOG = 'animehub_live_catalog_v3';
+const CATALOG_CHANGED_EVENT = 'animehub:catalog_updated';
+
 export function getActiveCatalog(): Anime[] {
-  if (typeof window === 'undefined') return ANIME_CATALOG;
+  if (typeof window === 'undefined') return INITIAL_ANIME_CATALOG;
   try {
-    const saved = localStorage.getItem('animehub_custom_anime_v1');
+    const saved = localStorage.getItem(STORAGE_KEY_CUSTOM_CATALOG);
     if (saved) {
-      const custom: Anime[] = JSON.parse(saved);
-      if (custom.length > 0) {
-        const customIds = new Set(custom.map(c => c.id));
-        const filteredDefault = ANIME_CATALOG.filter(a => !customIds.has(a.id));
-        return [...custom, ...filteredDefault];
+      const parsed: Anime[] = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
       }
     }
   } catch {
     // Ignore error
   }
-  return ANIME_CATALOG;
+  return INITIAL_ANIME_CATALOG;
+}
+
+export function saveActiveCatalog(catalog: Anime[]): void {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(STORAGE_KEY_CUSTOM_CATALOG, JSON.stringify(catalog));
+    window.dispatchEvent(new Event(CATALOG_CHANGED_EVENT));
+    
+    // Auto-sync back to server database
+    fetch('/api/catalog', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ catalog })
+    }).catch(err => console.log('Failed to sync catalog with server:', err));
+  } catch (err) {
+    console.error('Failed to save catalog:', err);
+  }
+}
+
+export function resetCatalogToDefault(): void {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(STORAGE_KEY_CUSTOM_CATALOG);
+  window.dispatchEvent(new Event(CATALOG_CHANGED_EVENT));
 }
 
 export function getAnimeById(id: string): Anime | undefined {

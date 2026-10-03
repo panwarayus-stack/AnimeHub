@@ -62,27 +62,35 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
       {/* Content Container */}
       <div className="relative max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-14 sm:pb-16">
         <div className="max-w-2xl space-y-4">
-          {/* Japanese Kanji Kicker */}
-          <div className="text-sm font-medium tracking-widest text-rose-400/90 font-mono">
-            {currentAnime.japaneseTitle}
+          {/* Clean Unboxed Release Meta */}
+          <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-300">
+            <span className="text-rose-400 font-bold uppercase">{currentAnime.rating || 'TV-MA'}</span>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <span>1080p Ultra HD</span>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <span>Multi Audio</span>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <span className="text-emerald-400 font-semibold">ESub</span>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <span className="text-slate-400 font-sans">{currentAnime.japaneseTitle}</span>
           </div>
 
           {/* Title */}
-          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight text-balance">
+          <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight text-balance drop-shadow-md">
             {currentAnime.title}
           </h1>
 
-          {/* Unboxed Metadata Line (Zero-Pill Rule) */}
+          {/* Unboxed Metadata Line */}
           <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium">
-            <span className="font-mono text-emerald-400 font-semibold tabular-nums">★ {currentAnime.score?.toFixed(1)}</span>
+            <span className="font-mono text-emerald-400 font-bold tabular-nums">★ {currentAnime.score?.toFixed(1)}</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
             <span>{currentAnime.releaseYear}</span>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <span>{currentAnime.season || 'Season 1'}</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
             <span>{currentAnime.totalEpisodes} Episodes</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
             <span>{currentAnime.genres.slice(0, 3).join(', ')}</span>
-            <span aria-hidden="true" className="text-slate-600">·</span>
-            <span className="text-slate-400">{currentAnime.audioInfo}</span>
           </div>
 
           {/* Synopsis */}

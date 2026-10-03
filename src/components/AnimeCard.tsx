@@ -34,7 +34,7 @@ export const AnimeCard: React.FC<AnimeCardProps> = ({
   return (
     <div
       onClick={() => onSelect(anime)}
-      className="group relative flex flex-col cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus:outline-none"
+      className="group relative flex flex-col cursor-pointer transition-all duration-200 hover:-translate-y-1.5 focus:outline-none focus:ring-4 focus:ring-rose-500 focus:scale-105 focus:z-20 rounded-xl"
       tabIndex={0}
       role="button"
       onKeyDown={e => {
@@ -42,7 +42,7 @@ export const AnimeCard: React.FC<AnimeCardProps> = ({
       }}
     >
       {/* Poster Container */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-slate-900 border border-slate-800/80 shadow-md">
+      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-slate-950 border border-slate-800 shadow-md">
         {!imgError ? (
           <img
             src={anime.posterImage}
@@ -59,6 +59,11 @@ export const AnimeCard: React.FC<AnimeCardProps> = ({
             <span className="text-[10px] text-slate-500 mt-1">{anime.releaseYear}</span>
           </div>
         )}
+
+        {/* Video resolution text tag */}
+        <div className="absolute top-2 left-2 text-[10px] font-mono font-semibold text-slate-300 drop-shadow-md pointer-events-none">
+          1080p
+        </div>
 
         {/* Hover Action Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-between p-3.5">

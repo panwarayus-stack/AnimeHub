@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ArrowLeft, ChevronLeft, ChevronRight, ListVideo, Cloud, CheckCircle2, Bookmark } from 'lucide-react';
 import { Anime, Episode } from '../types/anime';
 import { VideoPlayer } from '../components/VideoPlayer';
-import { resolveVideoUrl, getCustomVideoBaseUrl } from '../services/video';
+import { resolveVideoUrl } from '../services/video';
 
 interface WatchPageProps {
   anime: Anime;
@@ -13,7 +13,6 @@ interface WatchPageProps {
   initialTime?: number;
   isFavorite: boolean;
   onToggleFavorite: (id: string) => void;
-  onOpenR2Modal: () => void;
 }
 
 export const WatchPage: React.FC<WatchPageProps> = ({
@@ -24,8 +23,7 @@ export const WatchPage: React.FC<WatchPageProps> = ({
   onSaveProgress,
   initialTime = 0,
   isFavorite,
-  onToggleFavorite,
-  onOpenR2Modal
+  onToggleFavorite
 }) => {
   const [theaterMode, setTheaterMode] = useState(false);
 
@@ -51,7 +49,6 @@ export const WatchPage: React.FC<WatchPageProps> = ({
   const prevEpisode = currentIndex > 0 ? anime.episodes[currentIndex - 1] : null;
   const nextEpisode = currentIndex < anime.episodes.length - 1 ? anime.episodes[currentIndex + 1] : null;
 
-  const currentR2Base = getCustomVideoBaseUrl();
   const currentStreamUrl = resolveVideoUrl(currentEpisode.videoUrl);
 
   return (
@@ -69,17 +66,12 @@ export const WatchPage: React.FC<WatchPageProps> = ({
         </button>
 
         <div className="flex items-center gap-3">
-          {/* Cloudflare R2 indicator */}
-          <button
-            onClick={onOpenR2Modal}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white transition-colors cursor-pointer"
-            title="Video pipeline information"
-          >
-            <Cloud className="w-3.5 h-3.5 text-rose-400" />
-            <span className="hidden sm:inline">
-              {currentR2Base ? 'R2 Custom Endpoint Active' : 'Demo Stream Mode'}
-            </span>
-          </button>
+          <span className="px-2 py-0.5 rounded bg-rose-600/20 text-rose-300 font-mono text-[11px] font-semibold border border-rose-500/30">
+            {anime.season || 'Season 1'}
+          </span>
+          <span className="px-2 py-0.5 rounded bg-slate-900 text-slate-300 font-mono text-[11px] border border-slate-800">
+            1080p Ultra HD
+          </span>
         </div>
       </div>
 
@@ -155,11 +147,11 @@ export const WatchPage: React.FC<WatchPageProps> = ({
               </p>
             </div>
 
-            {/* Direct stream inspection for R2 configuration */}
+            {/* Direct stream inspection */}
             <div className="p-3 bg-slate-900/60 border border-slate-800/80 rounded-xl space-y-1.5 text-xs">
               <div className="flex items-center justify-between text-slate-400">
-                <span className="font-semibold text-slate-300">Direct Video Source</span>
-                <span className="font-mono text-[11px] text-rose-400">No Vercel Proxy</span>
+                <span className="font-semibold text-slate-300">Direct Media Stream</span>
+                <span className="font-mono text-[11px] text-rose-400">1080p High Speed</span>
               </div>
               <p className="font-mono text-[11px] text-slate-400 break-all bg-slate-950/70 p-2 rounded border border-slate-850">
                 {currentStreamUrl}

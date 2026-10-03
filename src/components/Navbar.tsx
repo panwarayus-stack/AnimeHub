@@ -1,30 +1,32 @@
 import React, { useState } from 'react';
-import { Search, Cloud, Bookmark, Menu, X, FolderArchive } from 'lucide-react';
+import { Search, Bookmark, Menu, X, ShieldCheck, Tv } from 'lucide-react';
 
 interface NavbarProps {
-  currentTab: 'home' | 'browse' | 'genres' | 'library' | 'search';
-  onNavigate: (tab: 'home' | 'browse' | 'genres' | 'library' | 'search', genre?: string) => void;
-  onOpenR2Modal: () => void;
-  onOpenZipModal: () => void;
+  currentTab: 'home' | 'browse' | 'genres' | 'library' | 'search' | 'admin';
+  onNavigate: (tab: 'home' | 'browse' | 'genres' | 'library' | 'search' | 'admin', genre?: string) => void;
+  isAdmin: boolean;
   favoritesCount: number;
+  isTVMode: boolean;
+  onToggleTVMode: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentTab,
   onNavigate,
-  onOpenR2Modal,
-  onOpenZipModal,
-  favoritesCount
+  isAdmin,
+  favoritesCount,
+  isTVMode,
+  onToggleTVMode
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleNavClick = (tab: 'home' | 'browse' | 'genres' | 'library' | 'search') => {
+  const handleNavClick = (tab: 'home' | 'browse' | 'genres' | 'library' | 'search' | 'admin') => {
     onNavigate(tab);
     setMobileMenuOpen(false);
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#090b10]/95 backdrop-blur-md border-b border-slate-800/80 transition-colors">
+    <header className="sticky top-0 z-40 w-full bg-[#05070c]/95 backdrop-blur-md border-b border-slate-800/80 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Zone 1: Single text element wordmark */}
@@ -90,14 +92,20 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Zone 3: 1-2 primary actions */}
           <div className="flex items-center gap-2.5">
-            {/* Auto Zip & Episode Sorter */}
+            {/* TV Mode Toggle Button */}
             <button
-              onClick={onOpenZipModal}
-              className="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 border border-rose-500/30 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
-              title="Upload & Auto-Sort Anime Zip / Episodes"
+              onClick={onToggleTVMode}
+              className={`p-2 rounded-lg transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer ${
+                isTVMode
+                  ? 'bg-rose-600 text-white shadow-lg shadow-rose-600/30 ring-2 ring-rose-400'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-850'
+              }`}
+              title={isTVMode ? 'TV Mode Active (D-Pad remote enabled)' : 'Enable Smart TV Mode'}
             >
-              <FolderArchive className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Sort Zip</span>
+              <Tv className="w-4 h-4" />
+              <span className="hidden sm:inline font-mono text-[11px]">
+                {isTVMode ? 'TV ON' : 'TV Mode'}
+              </span>
             </button>
 
             {/* Search Button */}
@@ -124,15 +132,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Bookmark className="w-4 h-4" />
             </button>
 
-            {/* Cloudflare R2 Config */}
-            <button
-              onClick={onOpenR2Modal}
-              className="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800/70 rounded-lg transition-colors cursor-pointer"
-              title="Cloudflare R2 Video Source Setup"
-              aria-label="Cloudflare R2 Video Source Setup"
-            >
-              <Cloud className="w-4 h-4" />
-            </button>
+            {/* Admin Panel button - strictly only shown if admin is logged in */}
+            {isAdmin && (
+              <button
+                onClick={() => handleNavClick('admin')}
+                className="px-3 py-1.5 rounded-lg bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+                title="Admin Management Panel"
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Admin</span>
+              </button>
+            )}
 
             {/* Mobile menu toggle */}
             <button
@@ -184,16 +194,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </button>
             <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenZipModal();
-              }}
-              className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-rose-400 flex items-center gap-2"
-            >
-              <FolderArchive className="w-4 h-4" />
-              <span>Auto-Sort Zip / Episodes</span>
-            </button>
-            <button
               onClick={() => handleNavClick('search')}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
                 currentTab === 'search' ? 'bg-rose-500/10 text-rose-400' : 'text-slate-300'
@@ -204,17 +204,28 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                onOpenR2Modal();
+                onToggleTVMode();
               }}
-              className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 flex items-center gap-2"
+              className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-rose-400 flex items-center gap-2"
             >
-              <Cloud className="w-4 h-4 text-rose-400" />
-              <span>Cloudflare R2 Configuration</span>
+              <Tv className="w-4 h-4" />
+              <span>{isTVMode ? 'Disable TV 10-Foot Mode' : 'Enable Smart TV 10-Foot Mode'}</span>
             </button>
+            {isAdmin && (
+              <button
+                onClick={() => handleNavClick('admin')}
+                className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-rose-400 flex items-center gap-2"
+              >
+                <ShieldCheck className="w-4 h-4" />
+                <span>Admin Console</span>
+              </button>
+            )}
           </div>
         )}
       </div>
     </header>
   );
 };
+
+
 

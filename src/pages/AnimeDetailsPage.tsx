@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Play, Bookmark, ArrowLeft, Clock, Film, CheckCircle2 } from 'lucide-react';
 import { Anime, Episode, WatchProgress } from '../types/anime';
-import { ANIME_CATALOG } from '../data/anime';
+import { getActiveCatalog } from '../data/anime';
 import { AnimeCard } from '../components/AnimeCard';
 
 interface AnimeDetailsPageProps {
@@ -27,11 +27,17 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
   getAnimeProgress,
   getResumeEpisodeNumber
 }) => {
-  const [selectedSeasonTab] = useState(1);
   const resumeEp = getResumeEpisodeNumber(anime.id);
+  const catalog = getActiveCatalog();
+
+  // Find related seasons of the same franchise (e.g. Solo Leveling Season 1 & 2)
+  const franchiseSeasons = catalog.filter(
+    a => a.id.startsWith('solo-leveling') || (a.slug && a.slug.startsWith('solo-leveling'))
+  );
+  const isMultiSeason = franchiseSeasons.length > 1 && (anime.id.startsWith('solo-leveling') || anime.slug.startsWith('solo-leveling'));
 
   // Recommendations: anime sharing at least one genre, excluding current
-  const relatedAnime = ANIME_CATALOG.filter(
+  const relatedAnime = catalog.filter(
     a => a.id !== anime.id && a.genres.some(g => anime.genres.includes(g))
   ).slice(0, 4);
 
@@ -154,7 +160,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
 
         {/* Episodes Section */}
         <section className="mt-14 space-y-6">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-800 gap-3">
             <div className="flex items-center gap-3">
               <Film className="w-5 h-5 text-rose-500" />
               <h2 className="text-2xl font-bold text-white font-display">Episodes</h2>
@@ -162,9 +168,28 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
                 ({anime.episodes.length} Available)
               </span>
             </div>
-            <div className="text-xs text-slate-400">
-              Season {selectedSeasonTab}
-            </div>
+
+            {/* Franchise Season Switcher (e.g. Solo Leveling Season 1 vs Season 2) */}
+            {isMultiSeason && (
+              <div className="flex items-center gap-1.5 p-1 bg-slate-950 border border-slate-800 rounded-xl">
+                {franchiseSeasons.map(s => {
+                  const isActive = s.id === anime.id;
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => onSelectAnime(s)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                        isActive
+                          ? 'bg-rose-600 text-white shadow-md'
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      {s.season || s.title}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Episode Grid */}
@@ -177,7 +202,12 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
                 <div
                   key={ep.id}
                   onClick={() => onPlay(anime, ep.number)}
-                  className="group flex flex-col sm:flex-row gap-4 p-3.5 bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 rounded-xl transition-all cursor-pointer text-left shadow-sm"
+                  tabIndex={0}
+                  role="button"
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') onPlay(anime, ep.number);
+                  }}
+                  className="group flex flex-col sm:flex-row gap-4 p-3.5 bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 focus:outline-none focus:ring-4 focus:ring-rose-500 focus:scale-[1.02] rounded-xl transition-all cursor-pointer text-left shadow-sm"
                 >
                   {/* Episode Thumbnail */}
                   <div className="relative aspect-video sm:w-44 shrink-0 rounded-lg overflow-hidden bg-slate-950">

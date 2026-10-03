@@ -74,8 +74,34 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [nextEpisodeCountdown, setNextEpisodeCountdown] = useState<number | null>(null);
   const [resumeNotice, setResumeNotice] = useState<string | null>(null);
   const [hasError, setHasError] = useState(false);
+  const [useDemoFallback, setUseDemoFallback] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+
+  // Double-tap mobile skip feedback
+  const [doubleTapFeedback, setDoubleTapFeedback] = useState<'left' | 'right' | null>(null);
+  const lastTapRef = useRef<{ time: number; x: number }>({ time: 0, x: 0 });
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const now = Date.now();
+    const touch = e.touches[0];
+    const rect = e.currentTarget.getBoundingClientRect();
+    const xRatio = (touch.clientX - rect.left) / rect.width;
+
+    if (now - lastTapRef.current.time < 320) {
+      // Double tap detected
+      if (xRatio < 0.35) {
+        skipSeconds(-10);
+        setDoubleTapFeedback('left');
+        setTimeout(() => setDoubleTapFeedback(null), 650);
+      } else if (xRatio > 0.65) {
+        skipSeconds(10);
+        setDoubleTapFeedback('right');
+        setTimeout(() => setDoubleTapFeedback(null), 650);
+      }
+    }
+    lastTapRef.current = { time: now, x: touch.clientX };
+  };
 
   const controlsTimeoutRef = useRef<number | null>(null);
 
@@ -84,13 +110,16 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const prevEpisode = currentIndex > 0 ? anime.episodes[currentIndex - 1] : null;
   const nextEpisode = currentIndex < anime.episodes.length - 1 ? anime.episodes[currentIndex + 1] : null;
 
-  // Resolve video stream URL (from R2 base URL or fallback demo)
-  const resolvedUrl = resolveVideoUrl(currentEpisode.videoUrl);
+  // Resolve video stream URL (from direct local media path, server stream, or fallback)
+  const resolvedUrl = useDemoFallback
+    ? 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4'
+    : resolveVideoUrl(currentEpisode.videoUrl);
 
   // Reset states on episode change
   useEffect(() => {
     setIsLoading(true);
     setHasError(false);
+    setUseDemoFallback(false);
     setErrorMessage('');
     setCurrentSubtitleText('');
     setNextEpisodeCountdown(null);
@@ -111,11 +140,14 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     setDuration(video.duration || currentEpisode.duration || 0);
 
-    // Apply resume position
-    if (initialTime > 5 && initialTime < (video.duration || 1000) - 15) {
-      video.currentTime = initialTime;
-      const mins = Math.floor(initialTime / 60);
-      const secs = Math.floor(initialTime % 60);
+    // Apply resume position from localStorage or initialTime prop
+    const savedProgress = localStorage.getItem(`video-progress-${currentEpisode.id}`);
+    const timeToResume = savedProgress ? parseFloat(savedProgress) : initialTime;
+
+    if (timeToResume > 5 && timeToResume < (video.duration || 1000) - 15) {
+      video.currentTime = timeToResume;
+      const mins = Math.floor(timeToResume / 60);
+      const secs = Math.floor(timeToResume % 60);
       const timeStr = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
       setResumeNotice(`Resumed at ${timeStr}`);
       setTimeout(() => setResumeNotice(null), 3500);
@@ -140,7 +172,10 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       setBufferedEnd(video.buffered.end(video.buffered.length - 1));
     }
 
-    // Save progress periodically (throttled every 3 seconds or on key steps)
+    // Save progress periodically to localStorage
+    localStorage.setItem(`video-progress-${currentEpisode.id}`, curr.toFixed(2));
+
+    // Update parent progress callback
     if (Math.floor(curr) % 3 === 0 && video.duration > 0) {
       onSaveProgress(anime, currentEpisode, curr, video.duration);
     }
@@ -148,6 +183,22 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     // Subtitle rendering if WebVTT track is parsed or simulation
     updateCustomSubtitles(curr);
   };
+
+  // Unload & Unmount event listener to guarantee progress saving on leave
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      const video = videoRef.current;
+      if (video) {
+        localStorage.setItem(`video-progress-${currentEpisode.id}`, video.currentTime.toFixed(2));
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      handleBeforeUnload(); // Save progress on unmount / route change
+    };
+  }, [currentEpisode.id]);
 
   // Subtitle cue display simulation based on track
   const updateCustomSubtitles = (time: number) => {
@@ -349,36 +400,58 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
-  const customR2Base = getCustomVideoBaseUrl();
-
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
+      onTouchStart={handleTouchStart}
       onMouseLeave={() => isPlaying && setShowControls(false)}
       className={`relative w-full bg-black select-none overflow-hidden group rounded-xl shadow-2xl transition-all ${
         theaterMode ? 'max-w-none' : 'max-w-7xl mx-auto'
       }`}
       style={{ aspectRatio: isFullscreen ? 'auto' : '16/9' }}
     >
+      {/* Mobile Double Tap Feedback Badges */}
+      {doubleTapFeedback === 'left' && (
+        <div className="absolute left-8 top-1/2 -translate-y-1/2 z-30 p-4 bg-black/70 rounded-full text-white font-mono font-bold text-sm pointer-events-none animate-in zoom-in-50 duration-200">
+          « 10s
+        </div>
+      )}
+      {doubleTapFeedback === 'right' && (
+        <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30 p-4 bg-black/70 rounded-full text-white font-mono font-bold text-sm pointer-events-none animate-in zoom-in-50 duration-200">
+          10s »
+        </div>
+      )}
+
       {/* HTML5 Video Element */}
       <video
         ref={videoRef}
         src={resolvedUrl}
+        preload="metadata"
+        playsInline
         onLoadedMetadata={handleLoadedMetadata}
         onTimeUpdate={handleTimeUpdate}
         onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
+        onPause={() => {
+          setIsPlaying(false);
+          if (videoRef.current) {
+            localStorage.setItem(`video-progress-${currentEpisode.id}`, videoRef.current.currentTime.toFixed(2));
+          }
+        }}
         onWaiting={() => setIsLoading(true)}
         onPlaying={() => setIsLoading(false)}
-        onEnded={handleVideoEnded}
+        onEnded={() => {
+          if (videoRef.current) {
+            localStorage.setItem(`video-progress-${currentEpisode.id}`, videoRef.current.duration.toFixed(2));
+          }
+          handleVideoEnded();
+        }}
         onError={() => {
           setIsLoading(false);
           setHasError(true);
-          setErrorMessage('Unable to stream video. Verify the Cloudflare R2 bucket permissions or CORS settings.');
+          setErrorMessage('Unable to play this video. Please check the video URL, file availability, browser compatibility, or video format.');
         }}
         onClick={togglePlay}
-        playsInline
         className="w-full h-full object-contain cursor-pointer bg-black"
       />
 
@@ -441,15 +514,39 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
       {/* Error Fallback Overlay */}
       {hasError && (
-        <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/90 p-6">
-          <div className="max-w-md p-6 bg-slate-900/90 border border-rose-900/50 rounded-xl text-center space-y-3">
-            <AlertCircle className="w-10 h-10 text-rose-500 mx-auto" />
-            <h4 className="text-base font-bold text-white">Video Stream Unavailable</h4>
-            <p className="text-xs text-slate-300 leading-relaxed">{errorMessage}</p>
-            <div className="p-2 bg-slate-950 rounded text-[11px] font-mono text-slate-400 break-all text-left">
-              Source: {resolvedUrl}
+        <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/95 p-6">
+          <div className="max-w-md p-6 bg-slate-900 border border-slate-800 rounded-xl text-center space-y-4 shadow-2xl">
+            <AlertCircle className="w-12 h-12 text-rose-500 mx-auto animate-bounce" />
+            <div className="space-y-1">
+              <h4 className="text-base font-extrabold text-white">Browser Playback Codec Limitation</h4>
+              <p className="text-xs text-rose-400 font-mono tracking-wide">{currentEpisode.videoUrl.split('/').pop()}</p>
             </div>
-            <div className="pt-2 flex justify-center gap-2">
+            
+            <p className="text-xs text-slate-300 leading-relaxed text-left">
+              This file is encoded in <strong>10-bit HEVC (H.265)</strong>. While native smart TV systems (Tizen, webOS), Apple Safari, and Microsoft Edge support HEVC hardware decoding natively, standard browsers like Google Chrome and Firefox on desktop do not decode HEVC natively and will fail to stream.
+            </p>
+
+            <div className="p-3 bg-slate-950/80 border border-slate-800 rounded-lg text-[11px] font-mono text-slate-400 break-all text-left">
+              <span className="text-slate-500 block text-[10px] uppercase font-sans font-bold tracking-wider mb-1">Source Stream:</span>
+              {resolvedUrl}
+            </div>
+
+            <div className="pt-2 flex flex-col sm:flex-row justify-center gap-2.5">
+              <button
+                onClick={() => {
+                  setHasError(false);
+                  setIsLoading(true);
+                  setUseDemoFallback(true);
+                  if (videoRef.current) {
+                    videoRef.current.load();
+                    videoRef.current.play().catch(() => {});
+                  }
+                }}
+                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg shadow-md transition-colors cursor-pointer"
+              >
+                Play Compatible Demo Stream (H.264)
+              </button>
+
               <button
                 onClick={() => {
                   setHasError(false);
@@ -459,9 +556,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     videoRef.current.play().catch(() => {});
                   }
                 }}
-                className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white text-xs font-medium rounded-lg transition-colors cursor-pointer"
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg transition-colors cursor-pointer"
               >
-                Retry Playback
+                Retry Original URL
               </button>
             </div>
           </div>

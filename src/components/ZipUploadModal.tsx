@@ -318,7 +318,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
               {/* Sorted Episodes Preview */}
               <div className="space-y-1.5 pt-1">
                 <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>Generated R2 Folder Structure:</span>
+                  <span>Generated Target Directory Structure:</span>
                   <button
                     onClick={handleCopyStructure}
                     className="text-[11px] text-rose-400 hover:text-rose-300 flex items-center gap-1 cursor-pointer"
