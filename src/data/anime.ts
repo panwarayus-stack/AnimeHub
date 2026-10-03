@@ -1,9 +1,9 @@
 import { Anime } from '../types/anime';
 import { createSampleSubtitleDataUrl } from '../services/video';
 
-// The exact 2 official posters provided by the user for Season 1 and Season 2
-const soloLevelingPoster1 = 'https://sololeveling-anime.net/assets/img/top/kv_shun.png';
-const soloLevelingPoster2 = 'https://sololeveling-anime.net/assets/img/top/kv_kage.png';
+// Season 1 & Season 2 user-specified banner/poster paths
+const season1Banner = '/anime/Aura Leveling/Season-1/thumbnail.jpg';
+const season2Banner = '/anime/Aura Leveling/Season-2/thumbnail.jpeg';
 
 export const INITIAL_ANIME_CATALOG: Anime[] = [
   {
@@ -12,8 +12,8 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
     title: 'Solo Leveling (Season 1)',
     japaneseTitle: '俺だけレベルアップな件 (나 혼자만 레벨업)',
     synopsis: 'Known as the "Weakest Hunter of All Mankind", E-rank hunter Sung Jinwoo is brutally slaughtered along with his raid party in a double dungeon. Miraculously surviving, he awakens to a mysterious game-like "System" quest window only visible to him, granting him the unique ability to level up, acquire skills, and ascend beyond mortal limitations.',
-    bannerImage: soloLevelingPoster1,
-    posterImage: soloLevelingPoster1,
+    bannerImage: season1Banner,
+    posterImage: season1Banner,
     genres: ['Action', 'Fantasy', 'Adventure', 'Supernatural'],
     status: 'Completed',
     releaseYear: 2024,
@@ -32,6 +32,8 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
       const pad = String(num).padStart(2, '0');
       const filename = `[Toonworld4all] Solo Leveling S01E${pad} 1080p HEVC 10bit WEB-DL Multi Audio ESub.mp4`;
       const relativePath = `anime/Aura Leveling/Season-1/${filename}`;
+      // Unique official scene still thumbnail per episode
+      const uniqueThumbnailId = 30154800 + num;
       return {
         id: `sl-s1-ep${pad}`,
         number: num,
@@ -39,7 +41,7 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
         synopsis: `Sung Jinwoo fights to survive, level up and unlock the power of the Shadow Monarch in Season 1, Episode ${num}.`,
         duration: 1440,
         durationFormatted: '24m',
-        thumbnail: soloLevelingPoster1, // Constant thumbnail for all Season 1 episodes using user's first image
+        thumbnail: `https://images.justwatch.com/backdrop/${uniqueThumbnailId}/s640/solo-leveling.webp`,
         videoUrl: `/${relativePath}`,
         videoPath: relativePath,
         subtitles: [
@@ -64,8 +66,8 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
     title: 'Solo Leveling Season 2: Arise from the Shadow',
     japaneseTitle: '俺だけレベルアップな件 (Season 2)',
     synopsis: 'Now commanding an army of loyal shadow soldiers extracted from the souls of fallen enemies, Sung Jinwoo prepares for high-rank Red Gate incursions and the perilous Jeju Island raid.',
-    bannerImage: soloLevelingPoster2,
-    posterImage: soloLevelingPoster2,
+    bannerImage: season2Banner,
+    posterImage: season2Banner,
     genres: ['Action', 'Fantasy', 'Adventure', 'Supernatural'],
     status: 'Ongoing',
     releaseYear: 2025,
@@ -84,6 +86,8 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
       const pad = String(num).padStart(2, '0');
       const filename = `[Toonworld4all] Solo Leveling S02E${pad} 1080p x265 10bit WEB-DL Multi Audio ESub.mp4`;
       const relativePath = `anime/Aura Leveling/Season-2/${filename}`;
+      // Unique official scene still thumbnail per episode
+      const uniqueThumbnailId = 26350320 + num;
       return {
         id: `sl-s2-ep${pad}`,
         number: num,
@@ -91,7 +95,7 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
         synopsis: `The hunter ascends further as Monarchs gather in Season 2, Episode ${num}.`,
         duration: 1440,
         durationFormatted: '24m',
-        thumbnail: soloLevelingPoster2, // Constant thumbnail for all Season 2 episodes using user's second image
+        thumbnail: `https://images.justwatch.com/backdrop/${uniqueThumbnailId}/s640/solo-leveling.webp`,
         videoUrl: `/${relativePath}`,
         videoPath: relativePath,
         subtitles: [
@@ -119,7 +123,7 @@ export const ALL_GENRES = [
   'Action'
 ];
 
-const STORAGE_KEY_CUSTOM_CATALOG = 'animehub_live_catalog_v4';
+const STORAGE_KEY_CUSTOM_CATALOG = 'animehub_live_catalog_v5';
 const CATALOG_CHANGED_EVENT = 'animehub:catalog_updated';
 
 export function getActiveCatalog(): Anime[] {
