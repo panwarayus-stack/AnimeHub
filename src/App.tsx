@@ -250,13 +250,13 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen bg-[#05070c] text-slate-100 flex flex-col font-sans selection:bg-rose-600 selection:text-white ${
+      className={`min-h-screen bg-[#05070c] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white ${
         isTVMode ? 'tv-mode-active text-lg' : ''
       }`}
     >
       {/* Smart TV Remote Banner */}
       {isTVMode && (
-        <div className="bg-gradient-to-r from-rose-950 via-slate-900 to-rose-950 border-b border-rose-800/40 text-center py-1.5 px-4 text-xs text-rose-300 font-mono flex items-center justify-center gap-2">
+        <div className="bg-gradient-to-r from-blue-950 via-slate-900 to-blue-950 border-b border-blue-800/40 text-center py-1.5 px-4 text-xs text-blue-300 font-mono flex items-center justify-center gap-2">
           <span>✦ Smart TV 10-Foot Mode Active</span>
           <span aria-hidden="true" className="text-slate-600">·</span>
           <span>Remote D-Pad Navigation Enabled (Arrow Keys + OK / Enter) ✦</span>

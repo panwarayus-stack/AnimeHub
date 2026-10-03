@@ -51,9 +51,9 @@ export const BrowsePage: React.FC<BrowsePageProps> = ({
         <div>
           <div className="flex items-center gap-2">
             {isPopularView ? (
-              <Flame className="w-6 h-6 text-rose-500" />
+              <Flame className="w-6 h-6 text-blue-500" />
             ) : (
-              <Compass className="w-6 h-6 text-rose-500" />
+              <Compass className="w-6 h-6 text-blue-500" />
             )}
             <h1 className="text-3xl font-extrabold text-white tracking-tight font-display">
               {isPopularView ? 'Popular & Trending' : 'Browse by Genre'}
@@ -72,7 +72,7 @@ export const BrowsePage: React.FC<BrowsePageProps> = ({
           <select
             value={sortBy}
             onChange={e => setSortBy(e.target.value as 'score' | 'year' | 'title')}
-            className="bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-300 text-xs focus:outline-none focus:border-rose-500"
+            className="bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-300 text-xs focus:outline-none focus:border-blue-500"
           >
             <option value="score">Highest Rated</option>
             <option value="year">Release Year</option>
@@ -89,7 +89,7 @@ export const BrowsePage: React.FC<BrowsePageProps> = ({
             onClick={() => setSelectedGenre(genre)}
             className={`px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-colors cursor-pointer ${
               selectedGenre === genre
-                ? 'bg-rose-600 text-white font-semibold'
+                ? 'bg-blue-600 text-white font-semibold'
                 : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-850'
             }`}
           >
@@ -123,7 +123,7 @@ export const BrowsePage: React.FC<BrowsePageProps> = ({
             <p className="text-slate-400 text-sm">No anime found in this category.</p>
             <button
               onClick={() => setSelectedGenre('All')}
-              className="text-xs text-rose-400 hover:text-rose-300 underline"
+              className="text-xs text-blue-400 hover:text-blue-300 underline"
             >
               Show all anime
             </button>

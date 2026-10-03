@@ -64,7 +64,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
         <div className="max-w-2xl space-y-4">
           {/* Clean Unboxed Release Meta */}
           <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-300">
-            <span className="text-rose-400 font-bold uppercase">{currentAnime.rating || 'TV-MA'}</span>
+            <span className="text-blue-400 font-bold uppercase">{currentAnime.rating || 'TV-MA'}</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
             <span>1080p Ultra HD</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
@@ -102,7 +102,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           <div className="pt-2 flex flex-wrap items-center gap-3">
             <button
               onClick={() => onPlay(currentAnime, resumeEp)}
-              className="px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-rose-600/25 flex items-center gap-2 transition-all transform active:scale-95 cursor-pointer whitespace-nowrap"
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-blue-600/25 flex items-center gap-2 transition-all transform active:scale-95 cursor-pointer whitespace-nowrap"
             >
               <Play className="w-4 h-4 fill-white" />
               <span>{resumeEp > 1 ? `Resume Ep ${resumeEp}` : 'Watch Episode 1'}</span>
@@ -120,13 +120,13 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
               onClick={() => onToggleFavorite(currentAnime.id)}
               className={`p-3 rounded-xl border backdrop-blur-md transition-colors cursor-pointer ${
                 isFav
-                  ? 'bg-rose-500/20 border-rose-500 text-rose-300'
+                  ? 'bg-blue-500/20 border-blue-500 text-blue-300'
                   : 'bg-slate-900/80 border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800'
               }`}
               title={isFav ? 'Remove from Watchlist' : 'Add to Watchlist'}
               aria-label={isFav ? 'Remove from Watchlist' : 'Add to Watchlist'}
             >
-              <Bookmark className={`w-4 h-4 ${isFav ? 'fill-rose-300' : ''}`} />
+              <Bookmark className={`w-4 h-4 ${isFav ? 'fill-blue-300' : ''}`} />
             </button>
           </div>
         </div>
@@ -150,7 +150,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 key={i}
                 onClick={() => setCurrentIndex(i)}
                 className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                  i === currentIndex ? 'w-6 bg-rose-500' : 'w-2 bg-slate-600 hover:bg-slate-400'
+                  i === currentIndex ? 'w-6 bg-blue-500' : 'w-2 bg-slate-600 hover:bg-slate-400'
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />

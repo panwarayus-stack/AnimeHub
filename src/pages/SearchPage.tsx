@@ -83,7 +83,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search by title, e.g. Cyber Genesis, Kamakura, Twin Moons..."
-            className="w-full pl-11 pr-10 py-3.5 bg-slate-900/90 border border-slate-800 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 shadow-inner"
+            className="w-full pl-11 pr-10 py-3.5 bg-slate-900/90 border border-slate-800 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 shadow-inner"
             autoFocus
           />
           {query && (
@@ -106,7 +106,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
               onClick={() => setSelectedGenre(genre)}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors cursor-pointer ${
                 selectedGenre === genre
-                  ? 'bg-rose-600 text-white font-semibold'
+                  ? 'bg-blue-600 text-white font-semibold'
                   : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-850'
               }`}
             >
@@ -124,7 +124,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
                 key={status}
                 onClick={() => setSelectedStatus(status)}
                 className={`transition-colors cursor-pointer ${
-                  selectedStatus === status ? 'text-rose-400 font-semibold underline' : 'hover:text-white'
+                  selectedStatus === status ? 'text-blue-400 font-semibold underline' : 'hover:text-white'
                 }`}
               >
                 {status}
@@ -137,7 +137,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
             <select
               value={sortBy}
               onChange={e => setSortBy(e.target.value as 'score' | 'year' | 'title')}
-              className="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-slate-300 text-xs focus:outline-none focus:border-rose-500"
+              className="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-slate-300 text-xs focus:outline-none focus:border-blue-500"
             >
               <option value="score">Highest Rated</option>
               <option value="year">Release Year</option>
@@ -156,7 +156,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           {(query || selectedGenre !== 'All' || selectedStatus !== 'All') && (
             <button
               onClick={handleClearFilters}
-              className="text-xs text-rose-400 hover:text-rose-300 transition-colors"
+              className="text-xs text-blue-400 hover:text-blue-300 transition-colors"
             >
               Reset Filters
             </button>
@@ -190,7 +190,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
             <div className="pt-2">
               <button
                 onClick={handleClearFilters}
-                className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
               >
                 Clear Filters
               </button>

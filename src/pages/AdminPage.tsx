@@ -181,7 +181,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
     return (
       <div className="min-h-[80vh] flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-slate-900/90 border border-slate-800 rounded-2xl p-8 shadow-2xl space-y-6 text-center">
-          <div className="p-3.5 bg-rose-500/10 rounded-2xl w-14 h-14 mx-auto flex items-center justify-center text-rose-500">
+          <div className="p-3.5 bg-blue-500/10 rounded-2xl w-14 h-14 mx-auto flex items-center justify-center text-blue-500">
             <Lock className="w-7 h-7" />
           </div>
 
@@ -202,15 +202,15 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 value={passcodeInput}
                 onChange={e => setPasscodeInput(e.target.value)}
                 placeholder="Enter passcode (default: admin123)"
-                className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-rose-500 font-mono"
+                className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500 font-mono"
                 autoFocus
               />
-              {authError && <p className="text-xs text-rose-400 mt-1.5">{authError}</p>}
+              {authError && <p className="text-xs text-blue-400 mt-1.5">{authError}</p>}
             </div>
 
             <button
               type="submit"
-              className="w-full py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-lg shadow-rose-600/20"
+              className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-lg shadow-blue-600/20"
             >
               Authenticate &amp; Enter Admin Panel
             </button>
@@ -367,7 +367,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
       {/* Admin Top Dashboard Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 bg-slate-900 border border-slate-800 rounded-2xl shadow-xl">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-rose-500/20 text-rose-400 rounded-xl">
+          <div className="p-2.5 bg-blue-500/20 text-blue-400 rounded-xl">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>
@@ -391,7 +391,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
             </span>
             <span aria-hidden="true" className="text-slate-600">·</span>
             <span>
-              <strong className="text-rose-400">{totalEpisodesCount}</strong> Episodes
+              <strong className="text-blue-400">{totalEpisodesCount}</strong> Episodes
             </span>
           </div>
 
@@ -408,7 +408,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
               adminLogout();
               setIsAuthenticated(false);
             }}
-            className="px-3.5 py-2 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/30 rounded-xl transition-colors cursor-pointer flex items-center gap-1.5"
+            className="px-3.5 py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 rounded-xl transition-colors cursor-pointer flex items-center gap-1.5"
             title="Log Out"
           >
             <LogOut className="w-3.5 h-3.5" />
@@ -423,7 +423,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
           onClick={() => setActiveTab('anime')}
           className={`px-4 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
             activeTab === 'anime'
-              ? 'bg-rose-600 text-white shadow-md shadow-rose-600/20'
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
               : 'text-slate-400 hover:text-white hover:bg-slate-900'
           }`}
         >
@@ -435,7 +435,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
           onClick={() => setActiveTab('episodes')}
           className={`px-4 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
             activeTab === 'episodes'
-              ? 'bg-rose-600 text-white shadow-md shadow-rose-600/20'
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
               : 'text-slate-400 hover:text-white hover:bg-slate-900'
           }`}
         >
@@ -447,7 +447,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
           onClick={() => setActiveTab('zip')}
           className={`px-4 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
             activeTab === 'zip'
-              ? 'bg-rose-600 text-white shadow-md shadow-rose-600/20'
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
               : 'text-slate-400 hover:text-white hover:bg-slate-900'
           }`}
         >
@@ -459,7 +459,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
           onClick={() => setActiveTab('settings')}
           className={`px-4 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
             activeTab === 'settings'
-              ? 'bg-rose-600 text-white shadow-md shadow-rose-600/20'
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
               : 'text-slate-400 hover:text-white hover:bg-slate-900'
           }`}
         >
@@ -501,7 +501,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 });
                 setIsAnimeModalOpen(true);
               }}
-              className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shadow-md shadow-rose-600/25"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shadow-md shadow-blue-600/25"
             >
               <Plus className="w-4 h-4" />
               <span>Add New Anime</span>
@@ -521,7 +521,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                     className="w-16 h-22 object-cover rounded-lg bg-slate-950 border border-slate-800 shrink-0"
                   />
                   <div className="min-w-0 space-y-1 flex-1">
-                    <span className="text-[10px] text-rose-400 font-mono tracking-wider block">
+                    <span className="text-[10px] text-blue-400 font-mono tracking-wider block">
                       {anime.season || 'Season 1'} · {anime.releaseYear}
                     </span>
                     <h3 className="text-sm font-bold text-white truncate" title={anime.title}>
@@ -542,7 +542,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                       setSelectedAnimeId(anime.id);
                       setActiveTab('episodes');
                     }}
-                    className="text-rose-400 hover:text-rose-300 font-semibold flex items-center gap-1 cursor-pointer"
+                    className="text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1 cursor-pointer"
                   >
                     <span>Manage Episodes</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -561,7 +561,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                     </button>
                     <button
                       onClick={() => handleDeleteAnime(anime.id, anime.title)}
-                      className="p-1.5 text-slate-400 hover:text-rose-400 rounded-lg hover:bg-slate-800 transition-colors"
+                      className="p-1.5 text-slate-400 hover:text-blue-400 rounded-lg hover:bg-slate-800 transition-colors"
                       title="Delete Anime"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -586,7 +586,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
               <select
                 value={activeAnime?.id || ''}
                 onChange={e => setSelectedAnimeId(e.target.value)}
-                className="bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white font-semibold focus:outline-none focus:border-rose-500"
+                className="bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white font-semibold focus:outline-none focus:border-blue-500"
               >
                 {catalog.map(a => (
                   <option key={a.id} value={a.id}>
@@ -622,7 +622,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                     });
                     setIsEpisodeModalOpen(true);
                   }}
-                  className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold rounded-xl transition-colors cursor-pointer shadow-md shadow-rose-600/20 flex items-center gap-1.5"
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-xl transition-colors cursor-pointer shadow-md shadow-blue-600/20 flex items-center gap-1.5"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Add Episode</span>
@@ -639,7 +639,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                   <h3 className="text-sm font-bold text-white">Batch Episode &amp; Season Generator</h3>
                   <p className="text-xs text-slate-400">
                     Quickly sets up sequential episode paths like{' '}
-                    <code className="text-rose-300 font-mono text-[11px]">
+                    <code className="text-blue-300 font-mono text-[11px]">
                       /anime/{activeAnime.slug}/season{batchSeason}/episode-01.mp4
                     </code>
                   </p>
@@ -673,7 +673,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
 
                 <button
                   onClick={handleRunBatchGenerate}
-                  className="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-rose-300 font-semibold rounded-lg transition-colors cursor-pointer border border-rose-500/20"
+                  className="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-blue-300 font-semibold rounded-lg transition-colors cursor-pointer border border-blue-500/20"
                 >
                   Generate {batchCount} Season {batchSeason} Episodes
                 </button>
@@ -701,7 +701,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                         className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 bg-slate-900 border border-slate-800 rounded-xl hover:border-slate-700 transition-colors"
                       >
                         <div className="flex items-center gap-3.5 min-w-0 flex-1">
-                          <span className="w-8 h-8 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center font-mono font-bold text-xs text-rose-400 shrink-0">
+                          <span className="w-8 h-8 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center font-mono font-bold text-xs text-blue-400 shrink-0">
                             {ep.number}
                           </span>
                           <div className="min-w-0 space-y-0.5">
@@ -715,7 +715,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                         <div className="flex items-center gap-2 self-end sm:self-auto text-xs">
                           <button
                             onClick={() => onPlayEpisode(activeAnime, ep.number)}
-                            className="px-2.5 py-1 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition-colors cursor-pointer font-medium"
+                            className="px-2.5 py-1 bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white rounded-lg transition-colors cursor-pointer font-medium"
                           >
                             Play
                           </button>
@@ -731,7 +731,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                           </button>
                           <button
                             onClick={() => handleDeleteEpisode(ep.id, ep.title)}
-                            className="p-1.5 text-slate-400 hover:text-rose-400 rounded-lg hover:bg-slate-800 transition-colors"
+                            className="p-1.5 text-slate-400 hover:text-blue-400 rounded-lg hover:bg-slate-800 transition-colors"
                             title="Delete Episode"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -771,7 +771,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 value={zipInputFilename}
                 onChange={e => setZipInputFilename(e.target.value)}
                 placeholder="[Toonworld4all] Solo Leveling S02 1080p x265 10bit WEB-DL Multi Audio ESub.zip"
-                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-mono focus:outline-none focus:border-rose-500"
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-mono focus:outline-none focus:border-blue-500"
               />
               <div className="flex items-center gap-2 pt-1 text-xs">
                 <span className="text-slate-500">Quick Fill:</span>
@@ -782,7 +782,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                       '[Toonworld4all] Solo Leveling S02 1080p x265 10bit WEB-DL Multi Audio ESub.zip'
                     )
                   }
-                  className="text-rose-400 hover:underline"
+                  className="text-blue-400 hover:underline"
                 >
                   Solo Leveling S02
                 </button>
@@ -805,7 +805,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
               <button
                 type="button"
                 onClick={handleSortReleaseZip}
-                className="px-5 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-md shadow-rose-600/20"
+                className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-md shadow-blue-600/20"
               >
                 Parse &amp; Sort Release
               </button>
@@ -836,7 +836,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 </div>
                 <div className="p-2.5 bg-slate-950 rounded-xl border border-slate-850">
                   <span className="text-[10px] text-slate-500 block">Season</span>
-                  <span className="font-bold text-rose-400 font-mono block">
+                  <span className="font-bold text-blue-400 font-mono block">
                     Season {zipResultInfo.seasonNumber}
                   </span>
                 </div>
@@ -858,7 +858,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 <div className="max-h-36 overflow-y-auto bg-slate-950 p-3 rounded-xl border border-slate-850 font-mono text-[11px] text-slate-400 space-y-1">
                   {zipResultAnime.episodes.map(ep => (
                     <div key={ep.id} className="flex justify-between">
-                      <span className="text-rose-400 font-semibold">Ep {ep.number}</span>
+                      <span className="text-blue-400 font-semibold">Ep {ep.number}</span>
                       <span className="text-slate-300 truncate ml-3">{ep.videoUrl}</span>
                     </div>
                   ))}
@@ -880,7 +880,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
           {/* Media Streaming Server Config */}
           <div className="p-5 bg-slate-900 border border-slate-800 rounded-2xl space-y-4">
             <div className="flex items-center gap-2">
-              <Film className="w-5 h-5 text-rose-400" />
+              <Film className="w-5 h-5 text-blue-400" />
               <h3 className="text-sm font-bold text-white">Direct Media Storage &amp; Streaming Server Endpoint</h3>
             </div>
 
@@ -894,12 +894,12 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                   value={mediaBaseUrl}
                   onChange={e => setMediaBaseUrl(e.target.value)}
                   placeholder="https://media.yourdomain.com or http://localhost:8080"
-                  className="flex-1 px-3.5 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-rose-500"
+                  className="flex-1 px-3.5 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-blue-500"
                 />
                 <button
                   type="button"
                   onClick={handleSaveMediaUrl}
-                  className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer"
                 >
                   Save URL
                 </button>
@@ -911,7 +911,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
           {/* Google Drive Master Downloader & Real-time Progress */}
           <div className="p-5 bg-slate-900 border border-slate-800 rounded-2xl space-y-4">
             <div className="flex items-center gap-2">
-              <Download className="w-5 h-5 text-rose-400" />
+              <Download className="w-5 h-5 text-blue-400" />
               <h3 className="text-sm font-bold text-white">Google Drive Master Downloader &amp; Extractor</h3>
             </div>
 
@@ -930,7 +930,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                     value={gdriveFileId}
                     onChange={e => setGdriveFileId(e.target.value)}
                     placeholder="Enter File ID (e.g. 14Oo0_LyWFvDeZTsR9KeMVGhwDu6Zb3YV)"
-                    className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-rose-500"
+                    className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 <div className="sm:self-end">
@@ -938,7 +938,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                     type="button"
                     disabled={triggeringDownload || (downloadStatus && ['downloading', 'extracting'].includes(downloadStatus.stage))}
                     onClick={handleStartDownload}
-                    className="w-full sm:w-auto px-5 py-2 bg-rose-600 hover:bg-rose-500 disabled:bg-slate-800 disabled:text-slate-500 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-5 py-2 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 disabled:text-slate-500 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer flex items-center justify-center gap-2"
                   >
                     {triggeringDownload ? (
                       <>
@@ -961,7 +961,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-semibold text-slate-300">
                       Downloader Stage:{' '}
-                      <span className="text-rose-400 uppercase font-mono tracking-wider font-bold">
+                      <span className="text-blue-400 uppercase font-mono tracking-wider font-bold">
                         {downloadStatus.stage}
                       </span>
                     </span>
@@ -977,10 +977,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                     <div
                       className={`h-full transition-all duration-300 ${
                         downloadStatus.stage === 'error'
-                          ? 'bg-rose-600'
+                          ? 'bg-blue-600'
                           : downloadStatus.stage === 'ready'
                           ? 'bg-emerald-500'
-                          : 'bg-rose-500 animate-pulse'
+                          : 'bg-blue-500 animate-pulse'
                       }`}
                       style={{ width: `${downloadStatus.percent || 0}%` }}
                     />
@@ -1024,13 +1024,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 value={jsonImportText}
                 onChange={e => setJsonImportText(e.target.value)}
                 placeholder='[ { "id": "...", "title": "...", "episodes": [...] } ]'
-                className="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-rose-500"
+                className="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-blue-500"
               />
               <div className="flex items-center justify-between">
                 <button
                   type="button"
                   onClick={handleImportJson}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-rose-300 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-blue-300 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
                 >
                   Import &amp; Restore
                 </button>
@@ -1038,7 +1038,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 {importStatus && (
                   <span
                     className={`text-xs ${
-                      importStatus.success ? 'text-emerald-400' : 'text-rose-400'
+                      importStatus.success ? 'text-emerald-400' : 'text-blue-400'
                     }`}
                   >
                     {importStatus.message}
@@ -1057,11 +1057,11 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 value={newPasscode}
                 onChange={e => setNewPasscode(e.target.value)}
                 placeholder="New passcode (e.g. MySecretPass!)"
-                className="flex-1 px-3.5 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-mono focus:outline-none focus:border-rose-500"
+                className="flex-1 px-3.5 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-mono focus:outline-none focus:border-blue-500"
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer"
               >
                 Update Passcode
               </button>
@@ -1178,7 +1178,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-lg"
+                  className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg"
                 >
                   Save Anime
                 </button>
@@ -1268,7 +1268,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-lg"
+                  className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg"
                 >
                   Save Episode
                 </button>

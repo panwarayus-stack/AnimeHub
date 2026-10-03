@@ -311,21 +311,75 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   // Fullscreen toggle
   const toggleFullscreen = () => {
-    if (!containerRef.current) return;
-    if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen().then(() => setIsFullscreen(true)).catch(() => {});
+    const container = containerRef.current;
+    const video = videoRef.current;
+    if (!container) return;
+
+    const requestFs = container.requestFullscreen || 
+                      (container as any).webkitRequestFullscreen || 
+                      (container as any).mozRequestFullScreen || 
+                      (container as any).msRequestFullscreen;
+
+    const exitFs = document.exitFullscreen || 
+                   (document as any).webkitExitFullscreen || 
+                   (document as any).mozCancelFullScreen || 
+                   (document as any).msExitFullscreen;
+
+    const isCurrentlyFs = !!(document.fullscreenElement || 
+                            (document as any).webkitFullscreenElement || 
+                            (document as any).mozFullScreenElement || 
+                            (document as any).msFullscreenElement);
+
+    if (!isCurrentlyFs) {
+      if (requestFs) {
+        requestFs.call(container)
+          .then(() => setIsFullscreen(true))
+          .catch(() => {
+            // Fallback for iOS Safari
+            if (video && (video as any).webkitEnterFullscreen) {
+              (video as any).webkitEnterFullscreen();
+            } else {
+              setIsFullscreen(true);
+            }
+          });
+      } else if (video && (video as any).webkitEnterFullscreen) {
+        // Native iOS Safari fullscreen trigger
+        (video as any).webkitEnterFullscreen();
+      } else {
+        setIsFullscreen(true);
+      }
     } else {
-      document.exitFullscreen().then(() => setIsFullscreen(false)).catch(() => {});
+      if (exitFs) {
+        exitFs.call(document)
+          .then(() => setIsFullscreen(false))
+          .catch(() => setIsFullscreen(false));
+      } else {
+        setIsFullscreen(false);
+      }
     }
   };
 
   // Fullscreen change listener
   useEffect(() => {
     const handleFsChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
+      const isCurrentlyFs = !!(document.fullscreenElement || 
+                              (document as any).webkitFullscreenElement || 
+                              (document as any).mozFullScreenElement || 
+                              (document as any).msFullscreenElement);
+      setIsFullscreen(isCurrentlyFs);
     };
+    
     document.addEventListener('fullscreenchange', handleFsChange);
-    return () => document.removeEventListener('fullscreenchange', handleFsChange);
+    document.addEventListener('webkitfullscreenchange', handleFsChange);
+    document.addEventListener('mozfullscreenchange', handleFsChange);
+    document.addEventListener('MSFullscreenChange', handleFsChange);
+    
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFsChange);
+      document.removeEventListener('webkitfullscreenchange', handleFsChange);
+      document.removeEventListener('mozfullscreenchange', handleFsChange);
+      document.removeEventListener('MSFullscreenChange', handleFsChange);
+    };
   }, []);
 
   // Keyboard navigation shortcuts
@@ -406,8 +460,10 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       onMouseMove={handleMouseMove}
       onTouchStart={handleTouchStart}
       onMouseLeave={() => isPlaying && setShowControls(false)}
-      className={`relative w-full bg-black select-none overflow-hidden group rounded-xl shadow-2xl transition-all ${
-        theaterMode ? 'max-w-none' : 'max-w-7xl mx-auto'
+      className={`select-none overflow-hidden group transition-all ${
+        isFullscreen
+          ? 'fixed inset-0 z-50 bg-black w-screen h-screen rounded-none'
+          : `relative w-full bg-black shadow-2xl rounded-xl ${theaterMode ? 'max-w-none' : 'max-w-7xl mx-auto'}`
       }`}
       style={{ aspectRatio: isFullscreen ? 'auto' : '16/9' }}
     >
@@ -459,7 +515,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       {isLoading && !hasError && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/40 pointer-events-none">
           <div className="p-3 bg-black/60 rounded-full backdrop-blur-sm">
-            <RefreshCw className="w-8 h-8 text-rose-500 animate-spin" />
+            <RefreshCw className="w-8 h-8 text-blue-500 animate-spin" />
           </div>
         </div>
       )}
@@ -484,7 +540,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       {nextEpisodeCountdown !== null && nextEpisode && (
         <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/80 backdrop-blur-sm">
           <div className="max-w-md p-6 bg-slate-900 border border-slate-800 rounded-xl text-center space-y-4 shadow-2xl">
-            <p className="text-xs uppercase tracking-wider text-rose-400 font-semibold">Up Next</p>
+            <p className="text-xs uppercase tracking-wider text-blue-400 font-semibold">Up Next</p>
             <h3 className="text-lg font-bold text-white">
               Episode {nextEpisode.number}: {nextEpisode.title}
             </h3>
@@ -503,7 +559,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   onEpisodeChange(nextEpisode);
                   setNextEpisodeCountdown(null);
                 }}
-                className="px-5 py-2 text-xs font-semibold text-white bg-rose-600 hover:bg-rose-500 rounded-lg transition-colors cursor-pointer"
+                className="px-5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors cursor-pointer"
               >
                 Play Now
               </button>
@@ -516,10 +572,10 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       {hasError && (
         <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/95 p-6">
           <div className="max-w-md p-6 bg-slate-900 border border-slate-800 rounded-xl text-center space-y-4 shadow-2xl">
-            <AlertCircle className="w-12 h-12 text-rose-500 mx-auto animate-bounce" />
+            <AlertCircle className="w-12 h-12 text-blue-500 mx-auto animate-bounce" />
             <div className="space-y-1">
               <h4 className="text-base font-extrabold text-white">Browser Playback Codec Limitation</h4>
-              <p className="text-xs text-rose-400 font-mono tracking-wide">{currentEpisode.videoUrl.split('/').pop()}</p>
+              <p className="text-xs text-blue-400 font-mono tracking-wide">{currentEpisode.videoUrl.split('/').pop()}</p>
             </div>
             
             <p className="text-xs text-slate-300 leading-relaxed text-left">
@@ -574,7 +630,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         {/* Top Header Row */}
         <div className="flex items-center justify-between pointer-events-auto">
           <div className="space-y-0.5">
-            <span className="text-xs font-semibold text-rose-400 tracking-wider">
+            <span className="text-xs font-semibold text-blue-400 tracking-wider">
               EPISODE {currentEpisode.number}
             </span>
             <h3 className="text-sm sm:text-base font-bold text-white line-clamp-1">
@@ -587,7 +643,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
             <button
               onClick={() => setAutoNext(!autoNext)}
               className={`px-2.5 py-1 rounded text-xs font-medium transition-colors cursor-pointer ${
-                autoNext ? 'bg-rose-600/30 text-rose-300 border border-rose-500/40' : 'bg-black/60 text-slate-400'
+                autoNext ? 'bg-blue-600/30 text-blue-300 border border-blue-500/40' : 'bg-black/60 text-slate-400'
               }`}
               title="Toggle Auto Next Episode"
             >
@@ -618,7 +674,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
           <button
             onClick={togglePlay}
-            className="p-4 bg-rose-600 hover:bg-rose-500 text-white rounded-full shadow-xl transition-transform hover:scale-110 cursor-pointer"
+            className="p-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full shadow-xl transition-transform hover:scale-110 cursor-pointer"
             title={isPlaying ? 'Pause' : 'Play'}
           >
             {isPlaying ? <Pause className="w-6 h-6 fill-white" /> : <Play className="w-6 h-6 fill-white ml-0.5" />}
@@ -644,9 +700,27 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         </div>
 
         {/* Bottom Controls Bar */}
-        <div className="space-y-2 pointer-events-auto">
-          {/* Scrubber Progress Bar */}
-          <div className="relative flex items-center group/scrubber cursor-pointer">
+        <div className="space-y-3 pointer-events-auto">
+          {/* Custom Slick YouTube-like Progress Bar */}
+          <div className="relative w-full h-1 bg-slate-800/80 rounded-full group/scrubber flex items-center cursor-pointer transition-all hover:h-2">
+            {/* Buffered Track */}
+            {duration > 0 && bufferedEnd > 0 && (
+              <div
+                className="absolute h-full bg-slate-600/40 rounded-full pointer-events-none transition-all"
+                style={{ width: `${Math.min(100, (bufferedEnd / duration) * 100)}%` }}
+              />
+            )}
+            {/* Active Played Track (Blue Theme Accent) */}
+            <div
+              className="absolute h-full bg-blue-500 rounded-full pointer-events-none"
+              style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+            />
+            {/* Handle Thumb Dot (YouTube style, visible on hover) */}
+            <div
+              className="absolute w-3.5 h-3.5 bg-white rounded-full border-2 border-blue-500 shadow-md shadow-blue-500/50 pointer-events-none opacity-0 group-hover/scrubber:opacity-100 transition-opacity duration-150"
+              style={{ left: `calc(${duration > 0 ? (currentTime / duration) * 100 : 0}% - 7px)` }}
+            />
+            {/* Transparent Input Range acting as the click/drag proxy */}
             <input
               type="range"
               min={0}
@@ -654,15 +728,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
               step={0.1}
               value={currentTime}
               onChange={handleSeek}
-              className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-rose-500 focus:outline-none transition-all group-hover/scrubber:h-2.5"
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
             />
-            {/* Buffer progress indicator */}
-            {duration > 0 && bufferedEnd > 0 && (
-              <div
-                className="absolute left-0 top-0 bottom-0 bg-slate-700/50 rounded pointer-events-none -z-10"
-                style={{ width: `${Math.min(100, (bufferedEnd / duration) * 100)}%` }}
-              />
-            )}
           </div>
 
           {/* Controls row */}
@@ -693,7 +760,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   step={0.05}
                   value={isMuted ? 0 : volume}
                   onChange={e => handleVolumeChange(parseFloat(e.target.value))}
-                  className="w-16 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-rose-500 focus:outline-none"
+                  className="w-16 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500 focus:outline-none"
                 />
               </div>
 
@@ -717,7 +784,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     setShowSettingsMenu(false);
                   }}
                   className={`p-1.5 rounded transition-colors cursor-pointer flex items-center gap-1 ${
-                    selectedSubtitle !== 'off' ? 'text-rose-400' : 'text-slate-400 hover:text-white'
+                    selectedSubtitle !== 'off' ? 'text-blue-400' : 'text-slate-400 hover:text-white'
                   }`}
                   title="Subtitles"
                 >
@@ -737,7 +804,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                       className="w-full text-left px-2 py-1.5 text-xs rounded hover:bg-slate-800 flex items-center justify-between text-slate-300"
                     >
                       <span>Off</span>
-                      {selectedSubtitle === 'off' && <Check className="w-3.5 h-3.5 text-rose-500" />}
+                      {selectedSubtitle === 'off' && <Check className="w-3.5 h-3.5 text-blue-500" />}
                     </button>
                     {(currentEpisode.subtitles || [
                       { id: 'sub-en', label: 'English', language: 'en', url: '' },
@@ -753,7 +820,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                         className="w-full text-left px-2 py-1.5 text-xs rounded hover:bg-slate-800 flex items-center justify-between text-slate-300"
                       >
                         <span>{sub.label}</span>
-                        {selectedSubtitle === sub.language && <Check className="w-3.5 h-3.5 text-rose-500" />}
+                        {selectedSubtitle === sub.language && <Check className="w-3.5 h-3.5 text-blue-500" />}
                       </button>
                     ))}
                   </div>
@@ -793,7 +860,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                         className="w-full text-left px-2 py-1.5 text-xs rounded hover:bg-slate-800 flex items-center justify-between text-slate-300"
                       >
                         <span>{aud.label}</span>
-                        {selectedAudio === aud.id && <Check className="w-3.5 h-3.5 text-rose-500" />}
+                        {selectedAudio === aud.id && <Check className="w-3.5 h-3.5 text-blue-500" />}
                       </button>
                     ))}
                   </div>
@@ -822,7 +889,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                         key={rate}
                         onClick={() => handleSpeedSelect(rate)}
                         className={`w-full text-left px-2 py-1 text-xs rounded hover:bg-slate-800 flex items-center justify-between ${
-                          playbackRate === rate ? 'text-rose-400 font-semibold' : 'text-slate-300'
+                          playbackRate === rate ? 'text-blue-400 font-semibold' : 'text-slate-300'
                         }`}
                       >
                         <span>{rate}x</span>
@@ -837,7 +904,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
               <button
                 onClick={onToggleTheater}
                 className={`p-1.5 rounded transition-colors cursor-pointer hidden md:inline-flex ${
-                  theaterMode ? 'text-rose-400' : 'text-slate-400 hover:text-white'
+                  theaterMode ? 'text-blue-400' : 'text-slate-400 hover:text-white'
                 }`}
                 title={theaterMode ? 'Exit Theater Mode (T)' : 'Theater Mode (T)'}
               >

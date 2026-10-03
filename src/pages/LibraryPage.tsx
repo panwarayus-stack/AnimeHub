@@ -57,7 +57,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
             onClick={() => setActiveTab('continue')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
               activeTab === 'continue'
-                ? 'bg-rose-600 text-white font-semibold shadow-sm'
+                ? 'bg-blue-600 text-white font-semibold shadow-sm'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -72,7 +72,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
             onClick={() => setActiveTab('watchlist')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
               activeTab === 'watchlist'
-                ? 'bg-rose-600 text-white font-semibold shadow-sm'
+                ? 'bg-blue-600 text-white font-semibold shadow-sm'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -87,7 +87,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
             onClick={() => setActiveTab('history')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
               activeTab === 'history'
-                ? 'bg-rose-600 text-white font-semibold shadow-sm'
+                ? 'bg-blue-600 text-white font-semibold shadow-sm'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -122,7 +122,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                        <div className="p-3 bg-rose-600 text-white rounded-full shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+                        <div className="p-3 bg-blue-600 text-white rounded-full shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
                           <Play className="w-4 h-4 fill-white ml-0.5" />
                         </div>
                       </div>
@@ -130,7 +130,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
                       {/* Progress bar */}
                       <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-800">
                         <div
-                          className="h-full bg-rose-500"
+                          className="h-full bg-blue-500"
                           style={{ width: `${item.percentage}%` }}
                         />
                       </div>
@@ -138,12 +138,12 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
 
                     <div className="p-4 space-y-1.5">
                       <div className="flex items-center justify-between text-xs text-slate-400">
-                        <span className="font-semibold text-rose-400 font-mono">
+                        <span className="font-semibold text-blue-400 font-mono">
                           Ep {item.episodeNumber}
                         </span>
                         <span className="font-mono tabular-nums">{remainingMins}m remaining</span>
                       </div>
-                      <h4 className="text-sm font-semibold text-white truncate group-hover:text-rose-400 transition-colors">
+                      <h4 className="text-sm font-semibold text-white truncate group-hover:text-blue-400 transition-colors">
                         {item.animeTitle}
                       </h4>
                       <p className="text-xs text-slate-400 truncate">
@@ -165,7 +165,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
               </p>
               <button
                 onClick={onBrowse}
-                className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+                className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
               >
                 Explore Shows
               </button>
@@ -202,7 +202,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
               </p>
               <button
                 onClick={onBrowse}
-                className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+                className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
               >
                 Browse Popular Shows
               </button>
@@ -224,7 +224,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
                 {!showClearConfirm ? (
                   <button
                     onClick={() => setShowClearConfirm(true)}
-                    className="text-xs text-slate-400 hover:text-rose-400 transition-colors flex items-center gap-1.5 cursor-pointer"
+                    className="text-xs text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                     <span>Clear Watch History</span>
@@ -237,7 +237,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
                         onClearHistory();
                         setShowClearConfirm(false);
                       }}
-                      className="px-2.5 py-1 bg-rose-600 text-white rounded font-medium hover:bg-rose-500"
+                      className="px-2.5 py-1 bg-blue-600 text-white rounded font-medium hover:bg-blue-500"
                     >
                       Yes, Clear
                     </button>
@@ -281,12 +281,12 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-800">
-                          <div className="h-full bg-rose-500" style={{ width: `${item.percentage}%` }} />
+                          <div className="h-full bg-blue-500" style={{ width: `${item.percentage}%` }} />
                         </div>
                       </div>
 
                       <div className="min-w-0 space-y-0.5">
-                        <h4 className="text-sm font-semibold text-white truncate hover:text-rose-400 transition-colors">
+                        <h4 className="text-sm font-semibold text-white truncate hover:text-blue-400 transition-colors">
                           {item.animeTitle}
                         </h4>
                         <p className="text-xs text-slate-400 truncate">
@@ -302,7 +302,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({
                       {anime && (
                         <button
                           onClick={() => onPlayAnime(anime, item.episodeNumber)}
-                          className="p-2 bg-rose-600 hover:bg-rose-500 text-white rounded-lg transition-colors cursor-pointer"
+                          className="p-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors cursor-pointer"
                           title="Resume"
                         >
                           <Play className="w-3.5 h-3.5 fill-white ml-0.5" />

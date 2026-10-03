@@ -23,7 +23,7 @@ export const ContinueWatchingRow: React.FC<ContinueWatchingRowProps> = ({
     <section className="py-6 border-b border-slate-850">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Clock className="w-5 h-5 text-rose-500" />
+          <Clock className="w-5 h-5 text-blue-500" />
           <h2 className="text-xl font-bold tracking-tight text-white font-display">Continue Watching</h2>
         </div>
         <span className="text-xs text-slate-400 font-mono">
@@ -54,7 +54,7 @@ export const ContinueWatchingRow: React.FC<ContinueWatchingRowProps> = ({
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                  <div className="p-3 bg-rose-600 text-white rounded-full shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+                  <div className="p-3 bg-blue-600 text-white rounded-full shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
                     <Play className="w-4 h-4 fill-white ml-0.5" />
                   </div>
                 </div>
@@ -75,7 +75,7 @@ export const ContinueWatchingRow: React.FC<ContinueWatchingRowProps> = ({
                 {/* Progress Bar at base of thumbnail */}
                 <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-800">
                   <div
-                    className="h-full bg-rose-500"
+                    className="h-full bg-blue-500"
                     style={{ width: `${item.percentage}%` }}
                   />
                 </div>
@@ -84,10 +84,10 @@ export const ContinueWatchingRow: React.FC<ContinueWatchingRowProps> = ({
               {/* Card Meta */}
               <div className="p-3.5 space-y-1">
                 <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span className="font-semibold text-rose-400">Ep {item.episodeNumber}</span>
+                  <span className="font-semibold text-blue-400">Ep {item.episodeNumber}</span>
                   <span className="font-mono tabular-nums">{remainingMinutes}m left</span>
                 </div>
-                <h4 className="text-sm font-semibold text-white truncate group-hover:text-rose-400 transition-colors">
+                <h4 className="text-sm font-semibold text-white truncate group-hover:text-blue-400 transition-colors">
                   {item.animeTitle}
                 </h4>
                 <p className="text-xs text-slate-400 truncate">

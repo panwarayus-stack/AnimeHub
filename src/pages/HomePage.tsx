@@ -68,7 +68,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         {/* Quick Genre Pills / Filter Bar */}
         <div className="pt-2">
           <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
-            <Compass className="w-4 h-4 text-rose-500" />
+            <Compass className="w-4 h-4 text-blue-500" />
             <span>Popular Genres</span>
           </div>
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">

@@ -54,7 +54,7 @@ export const AnimeRow: React.FC<AnimeRowProps> = ({
           {onViewAll && (
             <button
               onClick={onViewAll}
-              className="text-xs font-semibold text-rose-400 hover:text-rose-300 transition-colors mr-2 cursor-pointer"
+              className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors mr-2 cursor-pointer"
             >
               View All
             </button>

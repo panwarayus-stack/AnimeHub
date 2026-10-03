@@ -13,7 +13,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Brand & Purpose */}
           <div className="md:col-span-2 space-y-3">
             <span className="font-display text-xl font-bold tracking-tight text-white">
-              Anime<span className="text-rose-500">Hub</span>
+              Anime<span className="text-blue-500">Hub</span>
             </span>
             <p className="text-xs text-slate-400 leading-relaxed max-w-md">
               A private anime streaming platform for family and friends. Streams authorized collections

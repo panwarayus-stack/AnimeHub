@@ -83,7 +83,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
           {/* Right Column: Title, Metadata, Synopsis & CTAs */}
           <div className="flex-1 space-y-4 text-left">
             {/* Japanese Title Kicker */}
-            <div className="text-sm font-semibold tracking-wider text-rose-400 font-mono">
+            <div className="text-sm font-semibold tracking-wider text-blue-400 font-mono">
               {anime.japaneseTitle}
             </div>
 
@@ -112,7 +112,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
             </div>
 
             {/* Genres unboxed with typographic slashes */}
-            <div className="flex flex-wrap items-center gap-2 text-xs text-rose-300 font-medium">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-blue-300 font-medium">
               <span>{anime.genres.join('  /  ')}</span>
             </div>
 
@@ -137,7 +137,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
                 onClick={() => onPlay(anime, resumeEp)}
-                className="px-7 py-3.5 bg-rose-600 hover:bg-rose-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-rose-600/30 flex items-center gap-2.5 transition-all transform active:scale-95 cursor-pointer whitespace-nowrap"
+                className="px-7 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-blue-600/30 flex items-center gap-2.5 transition-all transform active:scale-95 cursor-pointer whitespace-nowrap"
               >
                 <Play className="w-5 h-5 fill-white" />
                 <span>{resumeEp > 1 ? `Resume Episode ${resumeEp}` : 'Watch Episode 1'}</span>
@@ -147,11 +147,11 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
                 onClick={() => onToggleFavorite(anime.id)}
                 className={`px-5 py-3.5 rounded-xl border backdrop-blur-md transition-colors flex items-center gap-2 text-sm font-medium cursor-pointer ${
                   isFavorite
-                    ? 'bg-rose-500/20 border-rose-500 text-rose-300'
+                    ? 'bg-blue-500/20 border-blue-500 text-blue-300'
                     : 'bg-slate-900 border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800'
                 }`}
               >
-                <Bookmark className={`w-4 h-4 ${isFavorite ? 'fill-rose-300' : ''}`} />
+                <Bookmark className={`w-4 h-4 ${isFavorite ? 'fill-blue-300' : ''}`} />
                 <span>{isFavorite ? 'In Watchlist' : 'Add to Watchlist'}</span>
               </button>
             </div>
@@ -162,7 +162,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
         <section className="mt-14 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-800 gap-3">
             <div className="flex items-center gap-3">
-              <Film className="w-5 h-5 text-rose-500" />
+              <Film className="w-5 h-5 text-blue-500" />
               <h2 className="text-2xl font-bold text-white font-display">Episodes</h2>
               <span className="text-xs font-mono text-slate-400">
                 ({anime.episodes.length} Available)
@@ -180,7 +180,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
                       onClick={() => onSelectAnime(s)}
                       className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                         isActive
-                          ? 'bg-rose-600 text-white shadow-md'
+                          ? 'bg-blue-600 text-white shadow-md'
                           : 'text-slate-400 hover:text-white'
                       }`}
                     >
@@ -207,7 +207,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
                   onKeyDown={e => {
                     if (e.key === 'Enter') onPlay(anime, ep.number);
                   }}
-                  className="group flex flex-col sm:flex-row gap-4 p-3.5 bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 focus:outline-none focus:ring-4 focus:ring-rose-500 focus:scale-[1.02] rounded-xl transition-all cursor-pointer text-left shadow-sm"
+                  className="group flex flex-col sm:flex-row gap-4 p-3.5 bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:scale-[1.02] rounded-xl transition-all cursor-pointer text-left shadow-sm"
                 >
                   {/* Episode Thumbnail */}
                   <div className="relative aspect-video sm:w-44 shrink-0 rounded-lg overflow-hidden bg-slate-950">
@@ -218,7 +218,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                      <div className="p-2.5 bg-rose-600 text-white rounded-full shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+                      <div className="p-2.5 bg-blue-600 text-white rounded-full shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
                         <Play className="w-4 h-4 fill-white ml-0.5" />
                       </div>
                     </div>
@@ -232,7 +232,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
                     {epProgress && epProgress.percentage > 0 && (
                       <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-800">
                         <div
-                          className="h-full bg-rose-500"
+                          className="h-full bg-blue-500"
                           style={{ width: `${epProgress.percentage}%` }}
                         />
                       </div>
@@ -242,7 +242,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
                   {/* Episode Info */}
                   <div className="flex-1 space-y-1.5 min-w-0 flex flex-col justify-center">
                     <div className="flex items-center justify-between text-xs text-slate-400">
-                      <span className="font-semibold text-rose-400 font-mono">
+                      <span className="font-semibold text-blue-400 font-mono">
                         Episode {ep.number}
                       </span>
                       {isFinished && (
@@ -251,7 +251,7 @@ export const AnimeDetailsPage: React.FC<AnimeDetailsPageProps> = ({
                         </span>
                       )}
                     </div>
-                    <h3 className="text-sm font-semibold text-white group-hover:text-rose-400 transition-colors truncate">
+                    <h3 className="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors truncate">
                       {ep.title}
                     </h3>
                     <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">

@@ -156,7 +156,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-800 shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-rose-500/10 rounded-xl text-rose-400">
+            <div className="p-2 bg-blue-500/10 rounded-xl text-blue-400">
               <FolderArchive className="w-5 h-5" />
             </div>
             <div>
@@ -177,7 +177,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
         <div className="py-4 space-y-4 overflow-y-auto flex-1 pr-1 text-sm">
           {/* Format Explanation */}
           <div className="p-3 bg-slate-900/90 border border-slate-800 rounded-xl space-y-1.5 text-xs">
-            <span className="font-semibold text-rose-400 uppercase tracking-wider text-[11px]">
+            <span className="font-semibold text-blue-400 uppercase tracking-wider text-[11px]">
               Expected Release Pattern
             </span>
             <p className="font-mono text-slate-300 text-[11px] bg-slate-950 p-2 rounded border border-slate-850">
@@ -201,7 +201,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
             onClick={() => fileInputRef.current?.click()}
             className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${
               dragActive
-                ? 'border-rose-500 bg-rose-500/10'
+                ? 'border-blue-500 bg-blue-500/10'
                 : 'border-slate-700 hover:border-slate-600 bg-slate-950/60'
             }`}
           >
@@ -213,7 +213,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
               className="hidden"
             />
             <div className="flex flex-col items-center justify-center space-y-2">
-              <div className="p-3 bg-slate-900 rounded-full text-rose-400">
+              <div className="p-3 bg-slate-900 rounded-full text-blue-400">
                 <Upload className="w-6 h-6" />
               </div>
               <p className="text-sm font-semibold text-white">
@@ -235,7 +235,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
                   setManualFilename(sampleReleaseName);
                   handleProcessFilename(sampleReleaseName, 12);
                 }}
-                className="px-2.5 py-1 text-xs font-medium text-rose-300 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
+                className="px-2.5 py-1 text-xs font-medium text-blue-300 bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/30 rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Sort Solo Leveling S02</span>
@@ -248,7 +248,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
                 value={manualFilename}
                 onChange={e => setManualFilename(e.target.value)}
                 placeholder="Or paste custom release filename..."
-                className="flex-1 px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-rose-500"
+                className="flex-1 px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
               />
               <button
                 type="button"
@@ -265,11 +265,11 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
             <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 space-y-2">
               <div className="flex items-center justify-between text-xs text-slate-300">
                 <span>{progressStatus}</span>
-                <span className="font-mono text-rose-400">{progressPercent}%</span>
+                <span className="font-mono text-blue-400">{progressPercent}%</span>
               </div>
               <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-rose-500 transition-all duration-300"
+                  className="h-full bg-blue-500 transition-all duration-300"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
@@ -292,7 +292,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
                 </div>
                 <div className="p-2 bg-slate-950 rounded border border-slate-850">
                   <span className="text-[10px] text-slate-500 block">Season</span>
-                  <span className="font-semibold text-rose-400 block font-mono">Season {parsedRelease.seasonNumber}</span>
+                  <span className="font-semibold text-blue-400 block font-mono">Season {parsedRelease.seasonNumber}</span>
                 </div>
                 <div className="p-2 bg-slate-950 rounded border border-slate-850">
                   <span className="text-[10px] text-slate-500 block">Quality</span>
@@ -321,7 +321,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
                   <span>Generated Target Directory Structure:</span>
                   <button
                     onClick={handleCopyStructure}
-                    className="text-[11px] text-rose-400 hover:text-rose-300 flex items-center gap-1 cursor-pointer"
+                    className="text-[11px] text-blue-400 hover:text-blue-300 flex items-center gap-1 cursor-pointer"
                   >
                     {copiedPath ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
                     <span>{copiedPath ? 'Copied Paths' : 'Copy All Paths'}</span>
@@ -330,7 +330,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
                 <div className="max-h-32 overflow-y-auto space-y-1 bg-slate-950 p-2.5 rounded-lg border border-slate-850 font-mono text-[11px]">
                   {createdAnime.episodes.map(ep => (
                     <div key={ep.id} className="flex items-center justify-between text-slate-300 py-0.5">
-                      <span className="text-rose-400 font-semibold">Ep {ep.number}</span>
+                      <span className="text-blue-400 font-semibold">Ep {ep.number}</span>
                       <span className="text-slate-400 truncate ml-2">{ep.videoUrl}</span>
                     </div>
                   ))}
@@ -354,7 +354,7 @@ export const ZipUploadModal: React.FC<ZipUploadModalProps> = ({
             <button
               type="button"
               onClick={handleSaveAndOpen}
-              className="px-5 py-2 text-xs font-semibold text-white bg-rose-600 hover:bg-rose-500 rounded-xl transition-all shadow-lg shadow-rose-600/25 flex items-center gap-2 cursor-pointer"
+              className="px-5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-xl transition-all shadow-lg shadow-blue-600/25 flex items-center gap-2 cursor-pointer"
             >
               <span>Add to AnimeHub Library</span>
               <ArrowRight className="w-4 h-4" />

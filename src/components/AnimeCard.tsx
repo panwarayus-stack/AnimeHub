@@ -34,7 +34,7 @@ export const AnimeCard: React.FC<AnimeCardProps> = ({
   return (
     <div
       onClick={() => onSelect(anime)}
-      className="group relative flex flex-col cursor-pointer transition-all duration-200 hover:-translate-y-1.5 focus:outline-none focus:ring-4 focus:ring-rose-500 focus:scale-105 focus:z-20 rounded-xl"
+      className="group relative flex flex-col cursor-pointer transition-all duration-200 hover:-translate-y-1.5 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:scale-105 focus:z-20 rounded-xl"
       tabIndex={0}
       role="button"
       onKeyDown={e => {
@@ -54,7 +54,7 @@ export const AnimeCard: React.FC<AnimeCardProps> = ({
           />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950">
-            <Film className="w-8 h-8 text-rose-500/60 mb-2" />
+            <Film className="w-8 h-8 text-blue-500/60 mb-2" />
             <span className="text-xs font-semibold text-slate-300 line-clamp-2">{anime.title}</span>
             <span className="text-[10px] text-slate-500 mt-1">{anime.releaseYear}</span>
           </div>
@@ -73,7 +73,7 @@ export const AnimeCard: React.FC<AnimeCardProps> = ({
               onClick={handleFavoriteClick}
               className={`p-2 rounded-lg backdrop-blur-md transition-colors cursor-pointer ${
                 isFavorite
-                  ? 'bg-rose-600 text-white shadow-lg'
+                  ? 'bg-blue-600 text-white shadow-lg'
                   : 'bg-black/60 text-slate-300 hover:text-white hover:bg-black/80'
               }`}
               title={isFavorite ? 'Remove from Watchlist' : 'Add to Watchlist'}
@@ -87,7 +87,7 @@ export const AnimeCard: React.FC<AnimeCardProps> = ({
           <div className="flex justify-center items-center">
             <button
               onClick={handlePlayClick}
-              className="p-3.5 bg-rose-600 hover:bg-rose-500 text-white rounded-full shadow-xl transform scale-90 group-hover:scale-100 transition-transform cursor-pointer"
+              className="p-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full shadow-xl transform scale-90 group-hover:scale-100 transition-transform cursor-pointer"
               title="Play Now"
               aria-label="Play Now"
             >
@@ -105,7 +105,7 @@ export const AnimeCard: React.FC<AnimeCardProps> = ({
         {progress && progress.percentage > 0 && (
           <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-black/60">
             <div
-              className="h-full bg-rose-500 transition-all"
+              className="h-full bg-blue-500 transition-all"
               style={{ width: `${progress.percentage}%` }}
             />
           </div>
@@ -114,7 +114,7 @@ export const AnimeCard: React.FC<AnimeCardProps> = ({
 
       {/* Card Info (Zero-Pill Discipline: clean unboxed text) */}
       <div className="mt-2.5 space-y-1 text-left">
-        <h4 className="text-sm font-semibold text-slate-100 group-hover:text-rose-400 transition-colors line-clamp-1">
+        <h4 className="text-sm font-semibold text-slate-100 group-hover:text-blue-400 transition-colors line-clamp-1">
           {anime.title}
         </h4>
         <div className="flex items-center gap-1.5 text-xs text-slate-400">

@@ -35,8 +35,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => handleNavClick('home')}
               className="text-left group cursor-pointer focus:outline-none"
             >
-              <span className="font-display text-2xl font-bold tracking-tight text-white group-hover:text-rose-400 transition-colors">
-                Anime<span className="text-rose-500">Hub</span>
+              <span className="font-display text-2xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
+                Anime<span className="text-blue-500">Hub</span>
               </span>
             </button>
 
@@ -46,7 +46,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => handleNavClick('home')}
                 className={`transition-colors hover:text-white cursor-pointer ${
                   currentTab === 'home'
-                    ? 'text-white font-semibold border-b-2 border-rose-500 pb-0.5'
+                    ? 'text-white font-semibold border-b-2 border-blue-500 pb-0.5'
                     : 'text-slate-400'
                 }`}
               >
@@ -56,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => handleNavClick('browse')}
                 className={`transition-colors hover:text-white cursor-pointer ${
                   currentTab === 'browse'
-                    ? 'text-white font-semibold border-b-2 border-rose-500 pb-0.5'
+                    ? 'text-white font-semibold border-b-2 border-blue-500 pb-0.5'
                     : 'text-slate-400'
                 }`}
               >
@@ -66,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => handleNavClick('genres')}
                 className={`transition-colors hover:text-white cursor-pointer ${
                   currentTab === 'genres'
-                    ? 'text-white font-semibold border-b-2 border-rose-500 pb-0.5'
+                    ? 'text-white font-semibold border-b-2 border-blue-500 pb-0.5'
                     : 'text-slate-400'
                 }`}
               >
@@ -76,13 +76,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => handleNavClick('library')}
                 className={`transition-colors hover:text-white cursor-pointer flex items-center gap-1.5 ${
                   currentTab === 'library'
-                    ? 'text-white font-semibold border-b-2 border-rose-500 pb-0.5'
+                    ? 'text-white font-semibold border-b-2 border-blue-500 pb-0.5'
                     : 'text-slate-400'
                 }`}
               >
                 <span>My Library</span>
                 {favoritesCount > 0 && (
-                  <span className="text-[11px] font-mono text-rose-400 font-bold tabular-nums">
+                  <span className="text-[11px] font-mono text-blue-400 font-bold tabular-nums">
                     ({favoritesCount})
                   </span>
                 )}
@@ -97,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onToggleTVMode}
               className={`p-2 rounded-lg transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer ${
                 isTVMode
-                  ? 'bg-rose-600 text-white shadow-lg shadow-rose-600/30 ring-2 ring-rose-400'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 ring-2 ring-blue-400'
                   : 'text-slate-400 hover:text-white hover:bg-slate-850'
               }`}
               title={isTVMode ? 'TV Mode Active (D-Pad remote enabled)' : 'Enable Smart TV Mode'}
@@ -113,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => handleNavClick('search')}
               className={`p-2 rounded-lg transition-colors flex items-center gap-2 cursor-pointer ${
                 currentTab === 'search'
-                  ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
+                  ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40'
                   : 'text-slate-300 hover:text-white hover:bg-slate-800/70'
               }`}
               title="Search Anime"
@@ -136,7 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {isAdmin && (
               <button
                 onClick={() => handleNavClick('admin')}
-                className="px-3 py-1.5 rounded-lg bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/40 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
                 title="Admin Management Panel"
               >
                 <ShieldCheck className="w-3.5 h-3.5" />
@@ -161,7 +161,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => handleNavClick('home')}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
-                currentTab === 'home' ? 'bg-rose-500/10 text-rose-400' : 'text-slate-300'
+                currentTab === 'home' ? 'bg-blue-500/10 text-blue-400' : 'text-slate-300'
               }`}
             >
               Home
@@ -169,7 +169,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => handleNavClick('browse')}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
-                currentTab === 'browse' ? 'bg-rose-500/10 text-rose-400' : 'text-slate-300'
+                currentTab === 'browse' ? 'bg-blue-500/10 text-blue-400' : 'text-slate-300'
               }`}
             >
               Popular &amp; Trending
@@ -177,7 +177,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => handleNavClick('genres')}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
-                currentTab === 'genres' ? 'bg-rose-500/10 text-rose-400' : 'text-slate-300'
+                currentTab === 'genres' ? 'bg-blue-500/10 text-blue-400' : 'text-slate-300'
               }`}
             >
               Genres
@@ -185,18 +185,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => handleNavClick('library')}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-between ${
-                currentTab === 'library' ? 'bg-rose-500/10 text-rose-400' : 'text-slate-300'
+                currentTab === 'library' ? 'bg-blue-500/10 text-blue-400' : 'text-slate-300'
               }`}
             >
               <span>My Library</span>
               {favoritesCount > 0 && (
-                <span className="text-xs text-rose-400 font-mono">({favoritesCount})</span>
+                <span className="text-xs text-blue-400 font-mono">({favoritesCount})</span>
               )}
             </button>
             <button
               onClick={() => handleNavClick('search')}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
-                currentTab === 'search' ? 'bg-rose-500/10 text-rose-400' : 'text-slate-300'
+                currentTab === 'search' ? 'bg-blue-500/10 text-blue-400' : 'text-slate-300'
               }`}
             >
               Search Catalog
@@ -206,7 +206,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onToggleTVMode();
               }}
-              className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-rose-400 flex items-center gap-2"
+              className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-blue-400 flex items-center gap-2"
             >
               <Tv className="w-4 h-4" />
               <span>{isTVMode ? 'Disable TV 10-Foot Mode' : 'Enable Smart TV 10-Foot Mode'}</span>
@@ -214,7 +214,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {isAdmin && (
               <button
                 onClick={() => handleNavClick('admin')}
-                className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-rose-400 flex items-center gap-2"
+                className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-blue-400 flex items-center gap-2"
               >
                 <ShieldCheck className="w-4 h-4" />
                 <span>Admin Console</span>
