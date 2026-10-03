@@ -155,6 +155,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    // Clear stale watch hash on initial page load so reopening always opens to Home
+    if (window.location.hash && window.location.hash.includes('watch')) {
+      window.location.hash = '';
+    }
     syncFromHash();
     window.addEventListener('hashchange', syncFromHash);
     return () => window.removeEventListener('hashchange', syncFromHash);

@@ -75,11 +75,11 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
     studio: 'A-1 Pictures',
     audioInfo: 'Multi Audio (Japanese, English, Hindi)',
     subtitleInfo: 'English (ESub), Spanish, French',
-    totalEpisodes: 12,
+    totalEpisodes: 13,
     featured: true,
     trending: true,
     recentlyAdded: true,
-    episodes: Array.from({ length: 12 }, (_, i) => {
+    episodes: Array.from({ length: 13 }, (_, i) => {
       const num = i + 1;
       const pad = String(num).padStart(2, '0');
       const filename = `[Toonworld4all] Solo Leveling S02E${pad} 1080p x265 10bit WEB-DL Multi Audio ESub.mp4`;
