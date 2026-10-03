@@ -60,9 +60,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [autoNext, setAutoNext] = useState(true);
 
   // Subtitles & Audio
-  const [selectedSubtitle, setSelectedSubtitle] = useState<string>('en');
+  const [selectedSubtitle, setSelectedSubtitle] = useState<string>('off');
   const [currentSubtitleText, setCurrentSubtitleText] = useState<string>('');
-  const [selectedAudio, setSelectedAudio] = useState<string>('default');
+  const [selectedAudio, setSelectedAudio] = useState<string>('main');
 
   // Menus
   const [showSpeedMenu, setShowSpeedMenu] = useState(false);
