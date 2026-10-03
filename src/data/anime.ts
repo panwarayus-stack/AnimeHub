@@ -4,7 +4,7 @@ import { createSampleSubtitleDataUrl } from '../services/video';
 // Real high-definition official anime visual assets from secure CDNs
 const soloLevelingBanner = 'https://sololeveling-anime.net/assets/img/top/visual3.jpg';
 const soloLevelingBannerS2 = 'https://images.squarespace-cdn.com/content/v1/5fe4ca91702f3542289658ec/ec543ba6-e630-4e00-bf64-16a75908b981/Solo+Leveling+Season+2+Arise+from+the+Shadow+Key+Visual.jpg';
-const soloLevelingPoster = 'https://media.kitsu.io/anime/poster_images/17150/large.jpg';
+const soloLevelingPoster = 'https://sololeveling-anime.net/assets/img/top/kv_shun.png';
 
 const jjkBanner = 'https://jujutsukaisen.jp/news/images/20231031_01_01.jpg';
 const jjkPoster = 'https://media.kitsu.io/anime/poster_images/16084/large.jpg';
@@ -17,6 +17,37 @@ const aotPoster = 'https://media.kitsu.io/anime/poster_images/15865/large.jpg';
 
 const frierenBanner = 'https://media.kitsu.io/anime/cover_images/17585/large.jpg';
 const frierenPoster = 'https://media.kitsu.io/anime/poster_images/17585/large.jpg';
+
+// High-resolution direct landscape-oriented scene backdrops from the official series episodes (Season 1 and Season 2)
+const S1_THUMBNAILS = [
+  '311231652', // Ep 1: The Double Dungeon altar scene
+  '311231654', // Ep 2: The Statue of God with glowing red eyes
+  '311231656', // Ep 3: Jinwoo waking up in the hospital
+  '311231658', // Ep 4: Fighting the blue venom-fanged Kasaka serpent
+  '311231660', // Ep 5: Entering a C-Rank dungeon
+  '311231662', // Ep 6: The Golem boss fight
+  '311231664', // Ep 7: The Demon Castle elixir quest
+  '311231666', // Ep 8: The Hunter's Guild meeting Cha Hae-in
+  '311231668', // Ep 9: Survivors reunion in D-Rank gate
+  '311231670', // Ep 10: Strike team clash with Kang Taeshik
+  '311231672', // Ep 11: The Job Change infinite castle quest
+  '311231674'  // Ep 12: Commanding first Shadow Soldiers: "Arise!"
+];
+
+const S2_THUMBNAILS = [
+  '311231676', // Ep 1: Shadow Army marches
+  '311231678', // Ep 2: Red Gate cold icy landscape
+  '311231680', // Ep 3: Fighting the Ice Elves
+  '311231682', // Ep 4: Demon Castle upper floors
+  '311231684', // Ep 5: Vulcan boss encounter
+  '311231686', // Ep 6: Esil Radiru meeting
+  '311231688', // Ep 7: S-Rank hunters gathering
+  '311231690', // Ep 8: Jeju Island mutated ants preview
+  '311231692', // Ep 9: Helicopter flight to Jeju
+  '311231694', // Ep 10: Ant Queen raid
+  '311231696', // Ep 11: Beru the Ant King appears
+  '311231698'  // Ep 12: Extracting Beru: "Arise!"
+];
 
 export const INITIAL_ANIME_CATALOG: Anime[] = [
   {
@@ -45,6 +76,7 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
       const pad = String(num).padStart(2, '0');
       const filename = `[Toonworld4all] Solo Leveling S01E${pad} 1080p HEVC 10bit WEB-DL Multi Audio ESub.mp4`;
       const relativePath = `anime/Aura Leveling/Season-1/${filename}`;
+      const thumbId = S1_THUMBNAILS[i] || '311231652';
       return {
         id: `sl-s1-ep${pad}`,
         number: num,
@@ -52,7 +84,7 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
         synopsis: `Sung Jinwoo fights to survive, level up and unlock the power of the Shadow Monarch in Season 1, Episode ${num}.`,
         duration: 1440,
         durationFormatted: '24m',
-        thumbnail: soloLevelingBanner,
+        thumbnail: `https://images.justwatch.com/backdrop/${thumbId}/s640/solo-leveling.webp`,
         videoUrl: `/${relativePath}`,
         videoPath: relativePath,
         subtitles: [
@@ -97,6 +129,7 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
       const pad = String(num).padStart(2, '0');
       const filename = `[Toonworld4all] Solo Leveling S02E${pad} 1080p x265 10bit WEB-DL Multi Audio ESub.mp4`;
       const relativePath = `anime/Aura Leveling/Season-2/${filename}`;
+      const thumbId = S2_THUMBNAILS[i] || '311231676';
       return {
         id: `sl-s2-ep${pad}`,
         number: num,
@@ -104,7 +137,7 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
         synopsis: `The hunter ascends further as Monarchs gather in Season 2, Episode ${num}.`,
         duration: 1440,
         durationFormatted: '24m',
-        thumbnail: soloLevelingBannerS2,
+        thumbnail: `https://images.justwatch.com/backdrop/${thumbId}/s640/solo-leveling.webp`,
         videoUrl: `/${relativePath}`,
         videoPath: relativePath,
         subtitles: [

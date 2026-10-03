@@ -367,6 +367,17 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                               (document as any).mozFullScreenElement || 
                               (document as any).msFullscreenElement);
       setIsFullscreen(isCurrentlyFs);
+
+      // Automatically handle screen orientation on mobile devices
+      if (isCurrentlyFs) {
+        if (screen.orientation && (screen.orientation as any).lock) {
+          (screen.orientation as any).lock('landscape').catch(() => {});
+        }
+      } else {
+        if (screen.orientation && (screen.orientation as any).unlock) {
+          (screen.orientation as any).unlock();
+        }
+      }
     };
     
     document.addEventListener('fullscreenchange', handleFsChange);
