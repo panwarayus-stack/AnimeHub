@@ -499,6 +499,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <div
+      id="video-player-container"
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onTouchStart={handleTouchStart}
@@ -927,7 +928,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
                 {showSpeedMenu && (
                   <div className="absolute bottom-8 right-0 w-28 bg-slate-900 border border-slate-800 rounded-lg shadow-xl p-1.5 z-30 space-y-1">
-                    {[0.5, 0.75, 1, 1.25, 1.5, 2].map(rate => (
+                    {[0.75, 1, 1.25, 1.5, 2].map(rate => (
                       <button
                         key={rate}
                         onClick={() => handleSpeedSelect(rate)}
