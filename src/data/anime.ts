@@ -116,10 +116,7 @@ export const ANIME_CATALOG = INITIAL_ANIME_CATALOG;
 
 export const ALL_GENRES = [
   'All',
-  'Action',
-  'Fantasy',
-  'Adventure',
-  'Supernatural'
+  'Action'
 ];
 
 const STORAGE_KEY_CUSTOM_CATALOG = 'animehub_live_catalog_v4';

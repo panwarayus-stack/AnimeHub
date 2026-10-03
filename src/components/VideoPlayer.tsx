@@ -759,6 +759,22 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
               className="absolute h-full bg-blue-500 rounded-full pointer-events-none"
               style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
             />
+
+            {/* Partially Watched / Left-off Progress Marker */}
+            {(() => {
+              const savedStr = typeof window !== 'undefined' ? localStorage.getItem(`video-progress-${currentEpisode.id}`) : null;
+              const savedTime = savedStr ? parseFloat(savedStr) : 0;
+              const pct = duration > 0 && savedTime > 5 && savedTime < duration - 5 ? (savedTime / duration) * 100 : 0;
+              if (pct <= 0) return null;
+              return (
+                <div
+                  className="absolute top-0 bottom-0 w-1 bg-amber-400 rounded-full z-20 pointer-events-none shadow-sm shadow-amber-400/50"
+                  style={{ left: `calc(${pct}% - 2px)` }}
+                  title={`Previously left off at ${formatTime(savedTime)}`}
+                />
+              );
+            })()}
+
             {/* Handle Thumb Dot (YouTube style, visible on hover) */}
             <div
               className="absolute w-3.5 h-3.5 bg-white rounded-full border-2 border-blue-500 shadow-md shadow-blue-500/50 pointer-events-none opacity-0 group-hover/scrubber:opacity-100 transition-opacity duration-150"
