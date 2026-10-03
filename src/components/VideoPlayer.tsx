@@ -473,8 +473,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       onMouseLeave={() => isPlaying && setShowControls(false)}
       className={`select-none overflow-hidden group transition-all ${
         isFullscreen
-          ? 'fixed inset-0 z-50 bg-black w-screen h-screen rounded-none'
-          : `relative w-full bg-black shadow-2xl rounded-xl ${theaterMode ? 'max-w-none' : 'max-w-7xl mx-auto'}`
+          ? 'fixed inset-0 z-50 bg-black w-[100dvw] h-[100dvh] rounded-none'
+          : `relative w-full bg-black shadow-none md:shadow-2xl rounded-none md:rounded-xl ${theaterMode ? 'max-w-none' : 'max-w-7xl mx-auto'}`
       }`}
       style={{ aspectRatio: isFullscreen ? 'auto' : '16/9' }}
     >
