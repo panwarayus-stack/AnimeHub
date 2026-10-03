@@ -174,6 +174,12 @@ export const WatchPage: React.FC<WatchPageProps> = ({
             <div className="space-y-2 max-h-[480px] overflow-y-auto pr-1">
               {anime.episodes.map(ep => {
                 const isActive = ep.id === currentEpisode.id;
+                const progressKey = `video-progress-${ep.id}`;
+                const savedTimeStr = typeof window !== 'undefined' ? localStorage.getItem(progressKey) : null;
+                const savedTime = savedTimeStr ? parseFloat(savedTimeStr) : 0;
+                const totalDuration = ep.duration || 1440;
+                const progressPct = savedTime > 0 ? Math.min(100, (savedTime / totalDuration) * 100) : 0;
+
                 return (
                   <button
                     key={ep.id}
@@ -194,6 +200,16 @@ export const WatchPage: React.FC<WatchPageProps> = ({
                       <div className="absolute bottom-1 right-1 px-1 bg-black/80 rounded text-[9px] font-mono text-slate-300">
                         {ep.durationFormatted}
                       </div>
+
+                      {/* Visual Watch Progress Bar */}
+                      {progressPct > 0 && (
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-900/80">
+                          <div
+                            className="h-full bg-blue-500 rounded-r"
+                            style={{ width: `${progressPct}%` }}
+                          />
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex-1 min-w-0">
