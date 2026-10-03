@@ -401,14 +401,21 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
       switch (e.key) {
         case ' ':
+        case 'k':
+        case 'K':
+        case 'Enter':
           e.preventDefault();
           togglePlay();
           break;
         case 'ArrowLeft':
+        case 'j':
+        case 'J':
           e.preventDefault();
           skipSeconds(-10);
           break;
         case 'ArrowRight':
+        case 'l':
+        case 'L':
           e.preventDefault();
           skipSeconds(10);
           break;
@@ -435,6 +442,31 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           e.preventDefault();
           toggleMute();
           break;
+        case 'c':
+        case 'C':
+          e.preventDefault();
+          setShowSubtitleMenu(!showSubtitleMenu);
+          break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9': {
+          e.preventDefault();
+          const percent = parseInt(e.key, 10) * 10;
+          const video = videoRef.current;
+          if (video && duration > 0) {
+            const newTime = (duration * percent) / 100;
+            video.currentTime = newTime;
+            setCurrentTime(newTime);
+          }
+          break;
+        }
       }
     };
 
@@ -518,7 +550,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           setHasError(true);
           setErrorMessage('Unable to play this video. Please check the video URL, file availability, browser compatibility, or video format.');
         }}
-        onClick={togglePlay}
+        onClick={() => setShowControls(!showControls)}
         className="w-full h-full object-contain cursor-pointer bg-black"
       />
 
