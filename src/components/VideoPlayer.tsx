@@ -447,6 +447,22 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           e.preventDefault();
           setShowSubtitleMenu(!showSubtitleMenu);
           break;
+        case 'n':
+        case 'N':
+        case ']':
+          if (nextEpisode) {
+            e.preventDefault();
+            onEpisodeChange(nextEpisode);
+          }
+          break;
+        case 'p':
+        case 'P':
+        case '[':
+          if (prevEpisode) {
+            e.preventDefault();
+            onEpisodeChange(prevEpisode);
+          }
+          break;
         case '0':
         case '1':
         case '2':

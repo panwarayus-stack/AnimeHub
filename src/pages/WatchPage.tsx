@@ -112,7 +112,8 @@ export const WatchPage: React.FC<WatchPageProps> = ({
                 <button
                   disabled={!prevEpisode}
                   onClick={() => prevEpisode && onEpisodeChange(prevEpisode.number)}
-                  className={`px-3 py-2 rounded-lg border text-xs font-medium flex items-center gap-1.5 transition-colors ${
+                  title="Previous Episode ([ or P)"
+                  className={`px-3.5 py-2 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all focus:ring-4 focus:ring-blue-500 ${
                     prevEpisode
                       ? 'bg-slate-900 border-slate-700 text-white hover:bg-slate-800 cursor-pointer'
                       : 'bg-slate-950 border-slate-900 text-slate-600 cursor-not-allowed'
@@ -125,9 +126,10 @@ export const WatchPage: React.FC<WatchPageProps> = ({
                 <button
                   disabled={!nextEpisode}
                   onClick={() => nextEpisode && onEpisodeChange(nextEpisode.number)}
-                  className={`px-3 py-2 rounded-lg border text-xs font-medium flex items-center gap-1.5 transition-colors ${
+                  title="Next Episode (] or N)"
+                  className={`px-3.5 py-2 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all focus:ring-4 focus:ring-blue-500 ${
                     nextEpisode
-                      ? 'bg-blue-600 border-blue-500 text-white hover:bg-blue-500 cursor-pointer'
+                      ? 'bg-blue-600 border-blue-500 text-white hover:bg-blue-500 cursor-pointer shadow-lg shadow-blue-500/20'
                       : 'bg-slate-950 border-slate-900 text-slate-600 cursor-not-allowed'
                   }`}
                 >

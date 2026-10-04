@@ -48,6 +48,16 @@
   scrollbar-width: none;
 }
 
+/* Desktop keyboard focus-visible indicator */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+[role="button"]:focus-visible,
+[tabindex="0"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #3b82f6, 0 0 16px 2px rgba(59, 130, 246, 0.45);
+}
+
 /* Smart TV 10-Foot UI Mode active enhancements */
 .tv-mode-active {
   font-size: 1.125rem; /* 18px base text for distant TV legibility */

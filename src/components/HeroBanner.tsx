@@ -102,7 +102,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           <div className="pt-2 flex flex-wrap items-center gap-3">
             <button
               onClick={() => onPlay(currentAnime, resumeEp)}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-blue-600/25 flex items-center gap-2 transition-all transform active:scale-95 cursor-pointer whitespace-nowrap"
+              className="primary-cta px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-blue-600/25 flex items-center gap-2 transition-all transform active:scale-95 cursor-pointer whitespace-nowrap focus:ring-4 focus:ring-blue-400"
             >
               <Play className="w-4 h-4 fill-white" />
               <span>{resumeEp > 1 ? `Resume Ep ${resumeEp}` : 'Watch Episode 1'}</span>
