@@ -9,26 +9,12 @@ interface Point {
 
 export function useTVNavigation() {
   const [isTVMode, setIsTVMode] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
+    if (typeof window === 'undefined') return true;
     const saved = localStorage.getItem(TV_MODE_STORAGE_KEY);
     if (saved !== null) return saved === 'true';
 
-    // Auto-detect Smart TV or Desktop screen
-    const ua = navigator.userAgent.toLowerCase();
-    const isTV =
-      ua.includes('smart-tv') ||
-      ua.includes('tizen') ||
-      ua.includes('webos') ||
-      ua.includes('appletv') ||
-      ua.includes('googletv') ||
-      ua.includes('crkey') ||
-      ua.includes('firetv') ||
-      ua.includes('hbbtv') ||
-      ua.includes('bravia');
-
-    const isDesktop = window.innerWidth >= 1200 && !/mobi|android|iphone|ipad|tablet/i.test(ua);
-
-    return isTV || isDesktop;
+    // Default to TV mode on initial start as requested
+    return true;
   });
 
   const toggleTVMode = useCallback(() => {

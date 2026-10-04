@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05070f" />
+      <stop offset="40%" stop-color="#0a1020" />
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.8" />
+    </linearGradient>
+    <radialGradient id="auraGlow" cx="65%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#9333ea" stop-opacity="0.45" />
+      <stop offset="60%" stop-color="#9333ea" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9333ea" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.2" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="25" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bgGrad)" />
+  <rect width="1280" height="720" fill="url(#auraGlow)" />
+
+  <!-- Geometric Anime Grid Lines & Ambient Particles -->
+  <g stroke="white" stroke-opacity="0.04" stroke-width="1">
+    <line x1="0" y1="180" x2="1280" y2="180" />
+    <line x1="0" y1="360" x2="1280" y2="360" />
+    <line x1="0" y1="540" x2="1280" y2="540" />
+    <line x1="320" y1="0" x2="320" y2="720" />
+    <line x1="640" y1="0" x2="640" y2="720" />
+    <line x1="960" y1="0" x2="960" y2="720" />
+  </g>
+
+  <!-- Glowing Aura Rune Circle -->
+  <g transform="translate(850, 360)">
+    <circle r="220" fill="none" stroke="#9333ea" stroke-width="2" stroke-dasharray="16,8" opacity="0.4" />
+    <circle r="180" fill="none" stroke="#9333ea" stroke-width="1.5" opacity="0.6" />
+    <circle r="140" fill="none" stroke="#9333ea" stroke-width="3" stroke-dasharray="32,12" opacity="0.5" filter="url(#glow)" />
+    <!-- Stylized Dagger / Monarch Wings Silhouette -->
+    <path d="M0 -150 L25 -40 L90 0 L25 40 L0 150 L-25 40 L-90 0 L-25 -40 Z" fill="#9333ea" opacity="0.25" filter="url(#glow)" />
+    <path d="M0 -110 L15 -25 L60 0 L15 25 L0 110 L-15 25 L-60 0 L-15 -25 Z" fill="#ffffff" opacity="0.35" />
+    <!-- Glowing Eye Rune -->
+    <circle cx="0" cy="0" r="14" fill="#9333ea" filter="url(#glow)" />
+    <circle cx="0" cy="0" r="6" fill="#ffffff" />
+  </g>
+
+  <!-- Dark Bottom Gradient for readability -->
+  <rect y="400" width="1280" height="320" fill="url(#bgGrad)" opacity="0.95" />
+
+  <!-- Top Brand Header -->
+  <g transform="translate(80, 80)">
+    <rect width="180" height="36" rx="18" fill="rgba(15,23,42,0.8)" stroke="#9333ea" stroke-width="1.5" />
+    <text x="90" y="23" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" text-anchor="middle" letter-spacing="2">SOLO LEVELING</text>
+  </g>
+
+  <!-- Season & Episode Badge -->
+  <g transform="translate(80, 480)">
+    <rect width="170" height="38" rx="8" fill="#9333ea" />
+    <text x="85" y="25" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="900" text-anchor="middle" letter-spacing="1">SEASON 2 · EP 12</text>
+  </g>
+
+  <!-- Episode Title -->
+  <g transform="translate(80, 565)">
+    <text fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="900" letter-spacing="-0.5">Extraction: General Beru</text>
+  </g>
+
+  <!-- Arc / Synopsis Hint -->
+  <g transform="translate(80, 620)">
+    <text fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="500">My King, I Obey Your Will</text>
+  </g>
+
+  <!-- Ultra HD & Audio Tags -->
+  <g transform="translate(1020, 600)">
+    <rect width="180" height="32" rx="6" fill="rgba(0,0,0,0.7)" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+    <text x="90" y="21" fill="#38bdf8" font-family="monospace" font-size="13" font-weight="700" text-anchor="middle">1080p · MULTI-AUDIO</text>
+  </g>
+</svg>

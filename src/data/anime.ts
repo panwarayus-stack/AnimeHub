@@ -2,7 +2,7 @@ import { Anime } from '../types/anime';
 import { createSampleSubtitleDataUrl } from '../services/video';
 
 // Season 1 & Season 2 user-specified banner/poster paths
-const season1Banner = '/anime/Aura Leveling/Season-1/thumbnail.jpg';
+const season1Banner = '/.anime/Aura Leveling/Season-1/thumbnail.jpg';
 const season2Banner = '/anime/Aura Leveling/Season-2/thumbnail.jpeg';
 
 export const INITIAL_ANIME_CATALOG: Anime[] = [
@@ -32,8 +32,6 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
       const pad = String(num).padStart(2, '0');
       const filename = `[Toonworld4all] Solo Leveling S01E${pad} 1080p HEVC 10bit WEB-DL Multi Audio ESub.mp4`;
       const relativePath = `anime/Aura Leveling/Season-1/${filename}`;
-      // Unique official scene still thumbnail per episode
-      const uniqueThumbnailId = 30154800 + num;
       return {
         id: `sl-s1-ep${pad}`,
         number: num,
@@ -41,7 +39,7 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
         synopsis: `Sung Jinwoo fights to survive, level up and unlock the power of the Shadow Monarch in Season 1, Episode ${num}.`,
         duration: 1440,
         durationFormatted: '24m',
-        thumbnail: `https://images.justwatch.com/backdrop/${uniqueThumbnailId}/s640/solo-leveling.webp`,
+        thumbnail: `/thumbnails/s1/ep${pad}.svg`,
         videoUrl: `/${relativePath}`,
         videoPath: relativePath,
         subtitles: [
@@ -86,8 +84,6 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
       const pad = String(num).padStart(2, '0');
       const filename = `[Toonworld4all] Solo Leveling S02E${pad} 1080p x265 10bit WEB-DL Multi Audio ESub.mp4`;
       const relativePath = `anime/Aura Leveling/Season-2/${filename}`;
-      // Unique official scene still thumbnail per episode
-      const uniqueThumbnailId = 26350320 + num;
       return {
         id: `sl-s2-ep${pad}`,
         number: num,
@@ -95,7 +91,7 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
         synopsis: `The hunter ascends further as Monarchs gather in Season 2, Episode ${num}.`,
         duration: 1440,
         durationFormatted: '24m',
-        thumbnail: `https://images.justwatch.com/backdrop/${uniqueThumbnailId}/s640/solo-leveling.webp`,
+        thumbnail: `/thumbnails/s2/ep${pad}.svg`,
         videoUrl: `/${relativePath}`,
         videoPath: relativePath,
         subtitles: [
@@ -123,7 +119,7 @@ export const ALL_GENRES = [
   'Action'
 ];
 
-const STORAGE_KEY_CUSTOM_CATALOG = 'animehub_live_catalog_v5';
+const STORAGE_KEY_CUSTOM_CATALOG = 'animehub_live_catalog_v6';
 const CATALOG_CHANGED_EVENT = 'animehub:catalog_updated';
 
 export function getActiveCatalog(): Anime[] {

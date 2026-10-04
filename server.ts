@@ -115,8 +115,11 @@ if (!fs.existsSync(CATALOG_DB_PATH)) {
   fs.writeFileSync(CATALOG_DB_PATH, JSON.stringify(defaultCatalog, null, 2), 'utf-8');
 }
 
-// Serve actual anime files directly
-app.use('/anime', express.static(path.join(__dirname, 'public', 'anime')));
+// Serve actual anime and asset files directly
+app.use('/.anime', express.static(path.join(__dirname, 'public', '.anime'), { dotfiles: 'allow' }));
+app.use('/anime', express.static(path.join(__dirname, 'public', 'anime'), { dotfiles: 'allow' }));
+app.use('/thumbnails', express.static(path.join(__dirname, 'public', 'thumbnails')));
+app.use(express.static(path.join(__dirname, 'public'), { dotfiles: 'allow' }));
 
 // API: Get Download Status
 app.get('/api/download-status', (req, res) => {
