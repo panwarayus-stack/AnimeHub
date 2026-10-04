@@ -556,6 +556,40 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         className="w-full h-full object-contain cursor-pointer bg-black"
       />
 
+      {/* Cinematic Absolute Thumbnail Overlay (Guarantees visible thumbnail before playback) */}
+      {!isPlaying && currentTime === 0 && (
+        <div 
+          onClick={togglePlay}
+          className="absolute inset-0 z-20 cursor-pointer bg-black overflow-hidden flex items-center justify-center group/playoverlay"
+        >
+          <img
+            src={currentEpisode.thumbnail || anime.bannerImage}
+            alt={currentEpisode.title}
+            className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover/playoverlay:scale-105 transition-transform duration-700 pointer-events-none"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/60 pointer-events-none" />
+          
+          {/* Big Glowing Play Button */}
+          <div className="relative z-20 p-5 bg-blue-600/90 rounded-full text-white shadow-2xl shadow-blue-500/50 group-hover/playoverlay:scale-110 group-hover/playoverlay:bg-blue-500 transition-all duration-300 transform">
+            <Play className="w-8 h-8 fill-current translate-x-0.5" />
+          </div>
+          
+          {/* Episode Info Overlay */}
+          <div className="absolute bottom-6 left-6 right-6 text-left z-20 pointer-events-none">
+            <span className="px-2.5 py-1 rounded bg-blue-600 text-white font-mono text-[10px] font-bold uppercase tracking-wider">
+              {anime.season || 'Season 1'} · Ep {currentEpisode.number}
+            </span>
+            <h2 className="text-xl md:text-2xl font-black text-white mt-2 drop-shadow-md">
+              {currentEpisode.title}
+            </h2>
+            <p className="text-xs text-slate-300 line-clamp-2 mt-1.5 max-w-xl drop-shadow-sm leading-relaxed">
+              {currentEpisode.synopsis}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Loading Spinner */}
       {isLoading && !hasError && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/40 pointer-events-none">
