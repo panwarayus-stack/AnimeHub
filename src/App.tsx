@@ -14,7 +14,6 @@ import { LibraryPage } from './pages/LibraryPage';
 import { BrowsePage } from './pages/BrowsePage';
 import { AdminPage } from './pages/AdminPage';
 import { MobileBottomNav } from './components/MobileBottomNav';
-import { TVRemoteGuide } from './components/TVRemoteGuide';
 
 import { Anime, Episode } from './types/anime';
 import { getAnimeById } from './data/anime';
@@ -389,12 +388,6 @@ export default function App() {
         currentTab={getActiveTabForNavbar()}
         onNavigate={handleNavClick}
         favoritesCount={favoriteIds.length}
-        isTVMode={isTVMode}
-        onToggleTVMode={toggleTVMode}
-      />
-
-      {/* Smart TV Remote Overlay Guide (visible only on TV mode) */}
-      <TVRemoteGuide
         isTVMode={isTVMode}
         onToggleTVMode={toggleTVMode}
       />

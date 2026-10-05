@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Bookmark, Menu, X, ShieldCheck, Tv } from 'lucide-react';
+import { Search, Bookmark, Menu, X, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   currentTab: 'home' | 'browse' | 'genres' | 'library' | 'search' | 'admin';
@@ -14,9 +14,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentTab,
   onNavigate,
   isAdmin,
-  favoritesCount,
-  isTVMode,
-  onToggleTVMode
+  favoritesCount
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -26,57 +24,38 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#05070c]/95 backdrop-blur-md border-b border-slate-800/80 transition-colors">
+    <header className="sticky top-0 z-40 w-full bg-[#07090e]/95 backdrop-blur-md border-b border-white/[0.08] transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Zone 1: Single text element wordmark */}
-          <div className="flex items-center gap-8">
+          {/* Brand Logo & Wordmark */}
+          <div className="flex items-center gap-10">
             <button
               onClick={() => handleNavClick('home')}
               className="text-left group cursor-pointer focus:outline-none"
             >
-              <span className="font-display text-2xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
+              <span className="font-display text-2xl font-black tracking-tight text-white group-hover:text-blue-400 transition-colors">
                 Anime<span className="text-blue-500">Hub</span>
               </span>
             </button>
 
-            {/* Zone 2: 4 clean text navigation links */}
-            <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
+            {/* Clean Desktop Navigation Links (No empty genres or duplicate tabs) */}
+            <nav className="hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide">
               <button
                 onClick={() => handleNavClick('home')}
                 className={`transition-colors hover:text-white cursor-pointer ${
                   currentTab === 'home'
-                    ? 'text-white font-semibold border-b-2 border-blue-500 pb-0.5'
+                    ? 'text-white border-b-2 border-blue-500 pb-0.5'
                     : 'text-slate-400'
                 }`}
               >
                 Home
               </button>
-              <button
-                onClick={() => handleNavClick('browse')}
-                className={`transition-colors hover:text-white cursor-pointer ${
-                  currentTab === 'browse'
-                    ? 'text-white font-semibold border-b-2 border-blue-500 pb-0.5'
-                    : 'text-slate-400'
-                }`}
-              >
-                Popular &amp; Trending
-              </button>
-              <button
-                onClick={() => handleNavClick('genres')}
-                className={`transition-colors hover:text-white cursor-pointer ${
-                  currentTab === 'genres'
-                    ? 'text-white font-semibold border-b-2 border-blue-500 pb-0.5'
-                    : 'text-slate-400'
-                }`}
-              >
-                Genres
-              </button>
+
               <button
                 onClick={() => handleNavClick('library')}
                 className={`transition-colors hover:text-white cursor-pointer flex items-center gap-1.5 ${
                   currentTab === 'library'
-                    ? 'text-white font-semibold border-b-2 border-blue-500 pb-0.5'
+                    ? 'text-white border-b-2 border-blue-500 pb-0.5'
                     : 'text-slate-400'
                 }`}
               >
@@ -90,42 +69,26 @@ export const Navbar: React.FC<NavbarProps> = ({
             </nav>
           </div>
 
-          {/* Zone 3: 1-2 primary actions */}
-          <div className="flex items-center gap-2.5">
-            {/* TV Mode Toggle Button */}
-            <button
-              onClick={onToggleTVMode}
-              className={`p-2 rounded-lg transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer ${
-                isTVMode
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 ring-2 ring-blue-400'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-850'
-              }`}
-              title={isTVMode ? 'TV Mode Active (D-Pad remote enabled)' : 'Enable Smart TV Mode'}
-            >
-              <Tv className="w-4 h-4" />
-              <span className="hidden sm:inline font-mono text-[11px]">
-                {isTVMode ? 'TV ON' : 'TV Mode'}
-              </span>
-            </button>
-
-            {/* Search Button */}
+          {/* Right Actions: Search & Watchlist */}
+          <div className="flex items-center gap-3">
+            {/* Search */}
             <button
               onClick={() => handleNavClick('search')}
-              className={`p-2 rounded-lg transition-colors flex items-center gap-2 cursor-pointer ${
+              className={`p-2 rounded-xl transition-colors flex items-center gap-2 cursor-pointer ${
                 currentTab === 'search'
-                  ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/70'
+                  ? 'bg-blue-500/20 text-blue-400 border border-blue-500/40'
+                  : 'text-slate-300 hover:text-white hover:bg-white/[0.05]'
               }`}
-              title="Search Anime"
-              aria-label="Search Anime"
+              title="Search"
+              aria-label="Search"
             >
               <Search className="w-4 h-4" />
             </button>
 
-            {/* Quick Watchlist Shortcut */}
+            {/* Quick Watchlist */}
             <button
               onClick={() => handleNavClick('library')}
-              className="p-2 text-slate-300 hover:text-white hover:bg-slate-800/70 rounded-lg transition-colors cursor-pointer"
+              className="p-2 text-slate-300 hover:text-white hover:bg-white/[0.05] rounded-xl transition-colors cursor-pointer"
               title="Watchlist"
               aria-label="Watchlist"
             >
@@ -147,85 +110,53 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-slate-300 hover:text-white rounded-lg hover:bg-slate-800/70 cursor-pointer"
-              aria-label="Toggle menu"
+              className="md:hidden p-2 text-slate-300 hover:text-white rounded-xl hover:bg-white/[0.05] cursor-pointer"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
-
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-slate-800/80 space-y-2">
-            <button
-              onClick={() => handleNavClick('home')}
-              className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
-                currentTab === 'home' ? 'bg-blue-500/10 text-blue-400' : 'text-slate-300'
-              }`}
-            >
-              Home
-            </button>
-            <button
-              onClick={() => handleNavClick('browse')}
-              className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
-                currentTab === 'browse' ? 'bg-blue-500/10 text-blue-400' : 'text-slate-300'
-              }`}
-            >
-              Popular &amp; Trending
-            </button>
-            <button
-              onClick={() => handleNavClick('genres')}
-              className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
-                currentTab === 'genres' ? 'bg-blue-500/10 text-blue-400' : 'text-slate-300'
-              }`}
-            >
-              Genres
-            </button>
-            <button
-              onClick={() => handleNavClick('library')}
-              className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-between ${
-                currentTab === 'library' ? 'bg-blue-500/10 text-blue-400' : 'text-slate-300'
-              }`}
-            >
-              <span>My Library</span>
-              {favoritesCount > 0 && (
-                <span className="text-xs text-blue-400 font-mono">({favoritesCount})</span>
-              )}
-            </button>
-            <button
-              onClick={() => handleNavClick('search')}
-              className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
-                currentTab === 'search' ? 'bg-blue-500/10 text-blue-400' : 'text-slate-300'
-              }`}
-            >
-              Search Catalog
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onToggleTVMode();
-              }}
-              className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-blue-400 flex items-center gap-2"
-            >
-              <Tv className="w-4 h-4" />
-              <span>{isTVMode ? 'Disable TV 10-Foot Mode' : 'Enable Smart TV 10-Foot Mode'}</span>
-            </button>
-            {isAdmin && (
-              <button
-                onClick={() => handleNavClick('admin')}
-                className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-blue-400 flex items-center gap-2"
-              >
-                <ShieldCheck className="w-4 h-4" />
-                <span>Admin Console</span>
-              </button>
-            )}
-          </div>
-        )}
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-[#0a0d14] border-b border-white/[0.08] px-4 py-4 space-y-2 animate-in slide-in-from-top-2 duration-150">
+          <button
+            onClick={() => handleNavClick('home')}
+            className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors cursor-pointer ${
+              currentTab === 'home'
+                ? 'bg-blue-600/20 text-blue-400 font-bold'
+                : 'text-slate-300 hover:bg-white/[0.04]'
+            }`}
+          >
+            Home
+          </button>
+
+          <button
+            onClick={() => handleNavClick('library')}
+            className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors cursor-pointer flex items-center justify-between ${
+              currentTab === 'library'
+                ? 'bg-blue-600/20 text-blue-400 font-bold'
+                : 'text-slate-300 hover:bg-white/[0.04]'
+            }`}
+          >
+            <span>My Library</span>
+            {favoritesCount > 0 && (
+              <span className="text-xs font-mono text-blue-400 font-bold">
+                {favoritesCount} saved
+              </span>
+            )}
+          </button>
+
+          <button
+            onClick={() => handleNavClick('search')}
+            className="w-full text-left px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:bg-white/[0.04] transition-colors cursor-pointer"
+          >
+            Search
+          </button>
+        </div>
+      )}
     </header>
   );
 };
-
-
-

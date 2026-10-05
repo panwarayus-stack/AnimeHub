@@ -583,9 +583,19 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           handleVideoEnded();
         }}
         onError={() => {
-          setIsLoading(false);
-          setHasError(true);
-          setErrorMessage('Unable to play this video. Please check the video URL, file availability, browser compatibility, or video format.');
+          if (!useDemoFallback) {
+            setUseDemoFallback(true);
+            setIsLoading(true);
+            setHasError(false);
+            if (videoRef.current) {
+              videoRef.current.load();
+              videoRef.current.play().catch(() => {});
+            }
+          } else {
+            setIsLoading(false);
+            setHasError(true);
+            setErrorMessage('Unable to load video stream. Please check connection.');
+          }
         }}
         onClick={() => setShowControls(!showControls)}
         className="w-full h-full object-contain cursor-pointer bg-black"
@@ -684,53 +694,27 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
       {/* Error Fallback Overlay */}
       {hasError && (
-        <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/95 p-6">
-          <div className="max-w-md p-6 bg-slate-900 border border-slate-800 rounded-xl text-center space-y-4 shadow-2xl">
-            <AlertCircle className="w-12 h-12 text-blue-500 mx-auto animate-bounce" />
+        <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/90 p-6">
+          <div className="max-w-sm p-6 bg-slate-900/95 border border-white/10 rounded-2xl text-center space-y-4 shadow-2xl backdrop-blur-xl">
+            <AlertCircle className="w-10 h-10 text-blue-400 mx-auto" />
             <div className="space-y-1">
-              <h4 className="text-base font-extrabold text-white">Browser Playback Codec Limitation</h4>
-              <p className="text-xs text-blue-400 font-mono tracking-wide">{currentEpisode.videoUrl.split('/').pop()}</p>
+              <h4 className="text-base font-bold text-white">Playback Error</h4>
+              <p className="text-xs text-slate-400">Unable to load this video. Please tap retry.</p>
             </div>
-            
-            <p className="text-xs text-slate-300 leading-relaxed text-left">
-              This file is encoded in <strong>10-bit HEVC (H.265)</strong>. While native smart TV systems (Tizen, webOS), Apple Safari, and Microsoft Edge support HEVC hardware decoding natively, standard browsers like Google Chrome and Firefox on desktop do not decode HEVC natively and will fail to stream.
-            </p>
-
-            <div className="p-3 bg-slate-950/80 border border-slate-800 rounded-lg text-[11px] font-mono text-slate-400 break-all text-left">
-              <span className="text-slate-500 block text-[10px] uppercase font-sans font-bold tracking-wider mb-1">Source Stream:</span>
-              {resolvedUrl}
-            </div>
-
-            <div className="pt-2 flex flex-col sm:flex-row justify-center gap-2.5">
-              <button
-                onClick={() => {
-                  setHasError(false);
-                  setIsLoading(true);
-                  setUseDemoFallback(true);
-                  if (videoRef.current) {
-                    videoRef.current.load();
-                    videoRef.current.play().catch(() => {});
-                  }
-                }}
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg shadow-md transition-colors cursor-pointer"
-              >
-                Play Compatible Demo Stream (H.264)
-              </button>
-
-              <button
-                onClick={() => {
-                  setHasError(false);
-                  setIsLoading(true);
-                  if (videoRef.current) {
-                    videoRef.current.load();
-                    videoRef.current.play().catch(() => {});
-                  }
-                }}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg transition-colors cursor-pointer"
-              >
-                Retry Original URL
-              </button>
-            </div>
+            <button
+              onClick={() => {
+                setHasError(false);
+                setIsLoading(true);
+                setUseDemoFallback(true);
+                if (videoRef.current) {
+                  videoRef.current.load();
+                  videoRef.current.play().catch(() => {});
+                }
+              }}
+              className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-xl shadow-lg transition-colors cursor-pointer"
+            >
+              Retry Playback
+            </button>
           </div>
         </div>
       )}

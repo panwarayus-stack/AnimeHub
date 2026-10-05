@@ -101,32 +101,25 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           {/* Action Buttons */}
           <div className="pt-2 flex flex-wrap items-center gap-3">
             <button
-              onClick={() => onPlay(currentAnime, resumeEp)}
-              className="primary-cta px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-blue-600/25 flex items-center gap-2 transition-all transform active:scale-95 cursor-pointer whitespace-nowrap focus:ring-4 focus:ring-blue-400"
+              onClick={() => onSelect(currentAnime)}
+              className="primary-cta px-7 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm sm:text-base rounded-2xl shadow-xl shadow-blue-600/30 flex items-center gap-2.5 transition-all transform active:scale-95 cursor-pointer whitespace-nowrap focus:ring-4 focus:ring-blue-400"
             >
               <Play className="w-4 h-4 fill-white" />
-              <span>{resumeEp > 1 ? `Resume Ep ${resumeEp}` : 'Watch Episode 1'}</span>
-            </button>
-
-            <button
-              onClick={() => onSelect(currentAnime)}
-              className="px-5 py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-medium text-sm rounded-xl border border-slate-700/80 backdrop-blur-md flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap"
-            >
-              <Info className="w-4 h-4 text-slate-400" />
-              <span>Details</span>
+              <span>Select Season &amp; Episodes</span>
             </button>
 
             <button
               onClick={() => onToggleFavorite(currentAnime.id)}
-              className={`p-3 rounded-xl border backdrop-blur-md transition-colors cursor-pointer ${
+              className={`px-5 py-3.5 rounded-2xl border backdrop-blur-md transition-all flex items-center gap-2 text-sm font-semibold cursor-pointer ${
                 isFav
                   ? 'bg-blue-500/20 border-blue-500 text-blue-300'
-                  : 'bg-slate-900/80 border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800'
+                  : 'bg-white/[0.04] border-white/10 text-slate-300 hover:text-white hover:bg-white/[0.08]'
               }`}
               title={isFav ? 'Remove from Watchlist' : 'Add to Watchlist'}
               aria-label={isFav ? 'Remove from Watchlist' : 'Add to Watchlist'}
             >
               <Bookmark className={`w-4 h-4 ${isFav ? 'fill-blue-300' : ''}`} />
+              <span>{isFav ? 'In Watchlist' : 'Watchlist'}</span>
             </button>
           </div>
         </div>

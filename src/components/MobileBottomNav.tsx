@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Flame, Search, Bookmark, Tv } from 'lucide-react';
+import { Home, Search, Bookmark } from 'lucide-react';
 
 interface MobileBottomNavProps {
   currentTab: 'home' | 'browse' | 'genres' | 'library' | 'search' | 'admin';
@@ -12,67 +12,44 @@ interface MobileBottomNavProps {
 export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   currentTab,
   onNavigate,
-  favoritesCount,
-  isTVMode,
-  onToggleTVMode
+  favoritesCount
 }) => {
   return (
     <nav
       aria-label="Mobile navigation"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#07090e]/95 backdrop-blur-xl border-t border-slate-800/80 px-2 py-2 flex items-center justify-around shadow-2xl safe-area-pb"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#07090e]/95 backdrop-blur-xl border-t border-white/[0.08] px-4 py-2 flex items-center justify-around shadow-2xl safe-area-pb"
     >
       <button
         onClick={() => onNavigate('home')}
-        className={`min-h-[44px] min-w-[44px] flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${
-          currentTab === 'home' ? 'text-blue-500 font-semibold' : 'text-slate-400 hover:text-slate-200'
+        className={`min-h-[44px] min-w-[56px] flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${
+          currentTab === 'home' ? 'text-blue-400 font-bold' : 'text-slate-400 hover:text-slate-200'
         }`}
       >
         <Home className={`w-5 h-5 transition-transform ${currentTab === 'home' ? 'scale-110' : ''}`} />
-        <span className="text-[10px] mt-1 font-medium tracking-tight">Home</span>
-      </button>
-
-      <button
-        onClick={() => onNavigate('browse')}
-        className={`min-h-[44px] min-w-[44px] flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${
-          currentTab === 'browse' ? 'text-blue-500 font-semibold' : 'text-slate-400 hover:text-slate-200'
-        }`}
-      >
-        <Flame className={`w-5 h-5 transition-transform ${currentTab === 'browse' ? 'scale-110' : ''}`} />
-        <span className="text-[10px] mt-1 font-medium tracking-tight">Popular</span>
+        <span className="text-[11px] mt-1 font-semibold tracking-tight">Home</span>
       </button>
 
       <button
         onClick={() => onNavigate('search')}
-        className={`min-h-[44px] min-w-[44px] flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${
-          currentTab === 'search' ? 'text-blue-500 font-semibold' : 'text-slate-400 hover:text-slate-200'
+        className={`min-h-[44px] min-w-[56px] flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${
+          currentTab === 'search' ? 'text-blue-400 font-bold' : 'text-slate-400 hover:text-slate-200'
         }`}
       >
         <Search className={`w-5 h-5 transition-transform ${currentTab === 'search' ? 'scale-110' : ''}`} />
-        <span className="text-[10px] mt-1 font-medium tracking-tight">Search</span>
+        <span className="text-[11px] mt-1 font-semibold tracking-tight">Search</span>
       </button>
 
       <button
         onClick={() => onNavigate('library')}
-        className={`min-h-[44px] min-w-[44px] relative flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${
-          currentTab === 'library' ? 'text-blue-500 font-semibold' : 'text-slate-400 hover:text-slate-200'
+        className={`min-h-[44px] min-w-[56px] relative flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${
+          currentTab === 'library' ? 'text-blue-400 font-bold' : 'text-slate-400 hover:text-slate-200'
         }`}
       >
         <Bookmark className={`w-5 h-5 transition-transform ${currentTab === 'library' ? 'scale-110' : ''}`} />
-        <span className="text-[10px] mt-1 font-medium tracking-tight">Library</span>
+        <span className="text-[11px] mt-1 font-semibold tracking-tight">Library</span>
         {favoritesCount > 0 && (
-          <span className="absolute top-0.5 right-2 w-2 h-2 bg-blue-500 rounded-full" />
+          <span className="absolute top-1 right-3 w-2 h-2 rounded-full bg-blue-500 ring-2 ring-[#07090e]" />
         )}
-      </button>
-
-      <button
-        onClick={onToggleTVMode}
-        className={`min-h-[44px] min-w-[44px] flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all cursor-pointer ${
-          isTVMode ? 'text-blue-400 bg-blue-500/10' : 'text-slate-400 hover:text-slate-200'
-        }`}
-        title="Toggle Smart TV 10-foot UI"
-      >
-        <Tv className="w-5 h-5" />
-        <span className="text-[10px] mt-1 font-medium tracking-tight">TV Mode</span>
       </button>
     </nav>
   );
