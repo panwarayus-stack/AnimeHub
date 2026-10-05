@@ -132,6 +132,18 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }
   }, [currentEpisode.id]);
 
+  // Lock body scroll when Theatre Mode fills the entire viewport
+  useEffect(() => {
+    if (theaterMode) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [theaterMode]);
+
   // Handle Initial Time / Resume Position
   const handleLoadedMetadata = () => {
     setIsLoading(false);
@@ -437,6 +449,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           e.preventDefault();
           onToggleTheater();
           break;
+        case 'Escape':
+          if (theaterMode) {
+            e.preventDefault();
+            onToggleTheater();
+          }
+          break;
         case 'm':
         case 'M':
           e.preventDefault();
@@ -488,7 +506,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [togglePlay, volume, onToggleTheater]);
+  }, [togglePlay, volume, onToggleTheater, theaterMode, nextEpisode, prevEpisode]);
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const video = videoRef.current;
@@ -520,10 +538,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       onMouseMove={handleMouseMove}
       onTouchStart={handleTouchStart}
       onMouseLeave={() => isPlaying && setShowControls(false)}
-      className={`w-full aspect-video select-none overflow-hidden group transition-all ${
+      className={`select-none overflow-hidden group transition-all ${
         isFullscreen
           ? 'fixed inset-0 z-50 bg-black w-[100dvw] h-[100dvh] aspect-auto rounded-none'
-          : `relative max-w-full bg-black shadow-none md:shadow-2xl rounded-none md:rounded-xl ${theaterMode ? 'max-w-none' : 'max-w-7xl mx-auto'}`
+          : theaterMode
+          ? 'fixed inset-0 z-40 bg-black w-screen h-[100dvh] aspect-auto rounded-none flex items-center justify-center'
+          : 'relative w-full aspect-video max-w-full bg-black shadow-none md:shadow-2xl rounded-none md:rounded-xl max-w-7xl mx-auto'
       }`}
     >
       {/* Mobile Double Tap Feedback Badges */}
@@ -724,9 +744,16 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         {/* Top Header Row */}
         <div className="flex items-center justify-between pointer-events-auto">
           <div className="space-y-0.5">
-            <span className="text-xs font-semibold text-blue-400 tracking-wider">
-              EPISODE {currentEpisode.number}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold text-blue-400 tracking-wider">
+                EPISODE {currentEpisode.number}
+              </span>
+              {theaterMode && (
+                <span className="px-2 py-0.5 rounded bg-blue-600/30 text-blue-300 font-mono text-[10px] font-bold border border-blue-500/40">
+                  THEATRE MODE
+                </span>
+              )}
+            </div>
             <h3 className="text-sm sm:text-base font-bold text-white line-clamp-1">
               {currentEpisode.title}
             </h3>
@@ -1010,15 +1037,27 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 )}
               </div>
 
-              {/* Theater Mode Toggle */}
+              {/* Theatre Mode Toggle Button */}
               <button
+                id="theatre-mode-toggle"
                 onClick={onToggleTheater}
-                className={`p-1.5 rounded transition-colors cursor-pointer hidden md:inline-flex ${
-                  theaterMode ? 'text-blue-400' : 'text-slate-400 hover:text-white'
+                className={`p-1.5 rounded transition-all cursor-pointer flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  theaterMode
+                    ? 'text-blue-400 bg-blue-500/20 border border-blue-500/40 shadow-sm shadow-blue-500/20'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
                 }`}
-                title={theaterMode ? 'Exit Theater Mode (T)' : 'Theater Mode (T)'}
+                title={theaterMode ? 'Exit Theatre Mode (T or Esc)' : 'Theatre Mode (T)'}
+                aria-label={theaterMode ? 'Exit Theatre Mode' : 'Theatre Mode'}
               >
-                <Square className="w-4 h-4" />
+                <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  {theaterMode ? (
+                    <path d="M7 10h10v4H7z" fill="currentColor" fillOpacity="0.4" />
+                  ) : (
+                    <line x1="2" y1="16" x2="22" y2="16" strokeDasharray="2,2" />
+                  )}
+                </svg>
+                <span className="hidden sm:inline font-mono text-[11px]">Theatre</span>
               </button>
 
               {/* Fullscreen Toggle */}
