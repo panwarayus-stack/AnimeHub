@@ -11,18 +11,19 @@ import { AnimeDetailsPage } from './pages/AnimeDetailsPage';
 import { WatchPage } from './pages/WatchPage';
 import { SearchPage } from './pages/SearchPage';
 import { LibraryPage } from './pages/LibraryPage';
-import { BrowsePage } from './pages/BrowsePage';
 import { AdminPage } from './pages/AdminPage';
+import { LorePage } from './pages/LorePage';
+import { OstPage } from './pages/OstPage';
 import { MobileBottomNav } from './components/MobileBottomNav';
 
-import { Anime, Episode } from './types/anime';
+import { Anime } from './types/anime';
 import { getAnimeById } from './data/anime';
 import { useWatchHistory } from './hooks/useWatchHistory';
 import { useFavorites } from './hooks/useFavorites';
 import { useTVNavigation } from './hooks/useTVNavigation';
 import { isAdminAuthenticated } from './services/catalogManager';
 
-type ViewMode = 'home' | 'details' | 'watch' | 'browse' | 'genres' | 'library' | 'search' | 'admin';
+type ViewMode = 'home' | 'details' | 'watch' | 'library' | 'search' | 'admin' | 'lore' | 'ost';
 
 export default function App() {
   const [viewMode, setViewMode] = useState<ViewMode>('home');
@@ -104,6 +105,20 @@ export default function App() {
       return;
     }
 
+    if (route === 'lore') {
+      setViewMode('lore');
+      setSelectedAnime(null);
+      setActiveWatchAnime(null);
+      return;
+    }
+
+    if (route === 'ost') {
+      setViewMode('ost');
+      setSelectedAnime(null);
+      setActiveWatchAnime(null);
+      return;
+    }
+
     if (route === 'watch') {
       const animeId = params.get('id');
       const ep = parseInt(params.get('ep') || '1', 10);
@@ -124,18 +139,6 @@ export default function App() {
         setViewMode('details');
         return;
       }
-    }
-
-    if (route === 'browse') {
-      setViewMode('browse');
-      return;
-    }
-
-    if (route === 'genres') {
-      const genre = params.get('genre') || 'All';
-      setActiveGenre(genre);
-      setViewMode('genres');
-      return;
     }
 
     if (route === 'library') {
@@ -164,40 +167,31 @@ export default function App() {
   }, [syncFromHash]);
 
   // Navigation handlers
-  const handleNavClick = (tab: 'home' | 'browse' | 'genres' | 'library' | 'search' | 'admin', genre?: string) => {
+  type NavTab = 'home' | 'lore' | 'ost' | 'library' | 'search' | 'admin';
+
+  const handleNavClick = (tab: NavTab) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setSelectedAnime(null);
+    setActiveWatchAnime(null);
+
     if (tab === 'home') {
       window.location.hash = '';
       setViewMode('home');
-      setSelectedAnime(null);
-      setActiveWatchAnime(null);
-    } else if (tab === 'browse') {
-      window.location.hash = 'browse';
-      setViewMode('browse');
-      setSelectedAnime(null);
-      setActiveWatchAnime(null);
-    } else if (tab === 'genres') {
-      const g = genre || 'All';
-      setActiveGenre(g);
-      window.location.hash = `genres?genre=${encodeURIComponent(g)}`;
-      setViewMode('genres');
-      setSelectedAnime(null);
-      setActiveWatchAnime(null);
+    } else if (tab === 'lore') {
+      window.location.hash = 'lore';
+      setViewMode('lore');
+    } else if (tab === 'ost') {
+      window.location.hash = 'ost';
+      setViewMode('ost');
     } else if (tab === 'library') {
       window.location.hash = 'library';
       setViewMode('library');
-      setSelectedAnime(null);
-      setActiveWatchAnime(null);
     } else if (tab === 'search') {
       window.location.hash = 'search';
       setViewMode('search');
-      setSelectedAnime(null);
-      setActiveWatchAnime(null);
     } else if (tab === 'admin') {
       window.location.hash = 'admin';
       setViewMode('admin');
-      setSelectedAnime(null);
-      setActiveWatchAnime(null);
     }
   };
 
@@ -233,9 +227,9 @@ export default function App() {
     }
   };
 
-  const getActiveTabForNavbar = (): 'home' | 'browse' | 'genres' | 'library' | 'search' | 'admin' => {
-    if (viewMode === 'browse') return 'browse';
-    if (viewMode === 'genres') return 'genres';
+  const getActiveTabForNavbar = (): NavTab => {
+    if (viewMode === 'lore') return 'lore';
+    if (viewMode === 'ost') return 'ost';
     if (viewMode === 'library') return 'library';
     if (viewMode === 'search') return 'search';
     if (viewMode === 'admin') return 'admin';
@@ -253,7 +247,7 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen bg-[#05070c] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white ${
+      className={`min-h-screen bg-[#07090e] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white ${
         isTVMode ? 'tv-mode-active text-lg' : ''
       }`}
     >
@@ -272,12 +266,10 @@ export default function App() {
         onNavigate={handleNavClick}
         isAdmin={isAdmin}
         favoritesCount={favoriteIds.length}
-        isTVMode={isTVMode}
-        onToggleTVMode={toggleTVMode}
       />
 
-      {/* Main Content Area (with bottom padding on mobile for sticky nav bar) */}
-      <main className="flex-1 pb-20 md:pb-0">
+      {/* Main Content Area */}
+      <main className="flex-1 pb-20 md:pb-0 bg-[#07090e]">
         {viewMode === 'home' && (
           <HomePage
             onSelectAnime={handleSelectAnime}
@@ -288,8 +280,6 @@ export default function App() {
             onRemoveContinueWatching={removeFromHistory}
             getProgress={getProgress}
             getResumeEpisodeNumber={getResumeEpisodeNumber}
-            onNavigateToGenre={genre => handleNavClick('genres', genre)}
-            onNavigateToBrowse={() => handleNavClick('browse')}
           />
         )}
 
@@ -320,27 +310,12 @@ export default function App() {
           />
         )}
 
-        {viewMode === 'browse' && (
-          <BrowsePage
-            isPopularView={true}
-            onSelectAnime={handleSelectAnime}
-            onPlayAnime={handlePlayAnime}
-            isFavorite={isFavorite}
-            onToggleFavorite={toggleFavorite}
-            getProgress={getProgress}
-          />
+        {viewMode === 'lore' && (
+          <LorePage />
         )}
 
-        {viewMode === 'genres' && (
-          <BrowsePage
-            initialGenre={activeGenre}
-            isPopularView={false}
-            onSelectAnime={handleSelectAnime}
-            onPlayAnime={handlePlayAnime}
-            isFavorite={isFavorite}
-            onToggleFavorite={toggleFavorite}
-            getProgress={getProgress}
-          />
+        {viewMode === 'ost' && (
+          <OstPage />
         )}
 
         {viewMode === 'search' && (

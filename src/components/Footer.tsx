@@ -2,7 +2,7 @@ import React from 'react';
 import { Lock } from 'lucide-react';
 
 interface FooterProps {
-  onNavigate: (tab: 'home' | 'browse' | 'genres' | 'library' | 'search' | 'admin') => void;
+  onNavigate: (tab: 'home' | 'lore' | 'ost' | 'library' | 'search' | 'admin') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
