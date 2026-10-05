@@ -520,12 +520,11 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       onMouseMove={handleMouseMove}
       onTouchStart={handleTouchStart}
       onMouseLeave={() => isPlaying && setShowControls(false)}
-      className={`select-none overflow-hidden group transition-all ${
+      className={`w-full aspect-video select-none overflow-hidden group transition-all ${
         isFullscreen
-          ? 'fixed inset-0 z-50 bg-black w-[100dvw] h-[100dvh] rounded-none'
-          : `relative w-full bg-black shadow-none md:shadow-2xl rounded-none md:rounded-xl ${theaterMode ? 'max-w-none' : 'max-w-7xl mx-auto'}`
+          ? 'fixed inset-0 z-50 bg-black w-[100dvw] h-[100dvh] aspect-auto rounded-none'
+          : `relative max-w-full bg-black shadow-none md:shadow-2xl rounded-none md:rounded-xl ${theaterMode ? 'max-w-none' : 'max-w-7xl mx-auto'}`
       }`}
-      style={{ aspectRatio: isFullscreen ? 'auto' : '16/9' }}
     >
       {/* Mobile Double Tap Feedback Badges */}
       {doubleTapFeedback === 'left' && (
