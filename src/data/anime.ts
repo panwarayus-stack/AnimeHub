@@ -97,7 +97,7 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
     episodes: Array.from({ length: 12 }, (_, i) => {
       const num = i + 1;
       const pad = String(num).padStart(2, '0');
-      const filename = `solo-leveling-s01e${pad}-1080p.mp4`;
+      const filename = `[Toonworld4all] Solo Leveling S01E${pad} 1080p HEVC 10bit WEB-DL Multi Audio ESub.mp4`;
       const relativePath = `anime/Aura Leveling/Season-1/${filename}`;
       const info = S1_EPISODE_TITLES_AND_SYNOPSES[i];
       return {
@@ -150,7 +150,7 @@ export const INITIAL_ANIME_CATALOG: Anime[] = [
     episodes: Array.from({ length: 13 }, (_, i) => {
       const num = i + 1;
       const pad = String(num).padStart(2, '0');
-      const filename = `solo-leveling-s02e${pad}-1080p.mp4`;
+      const filename = `[Toonworld4all] Solo Leveling S02E${pad} 1080p x265 10bit WEB-DL Multi Audio ESub.mp4`;
       const relativePath = `anime/Aura Leveling/Season-2/${filename}`;
       const info = S2_EPISODE_TITLES_AND_SYNOPSES[i];
       return {
